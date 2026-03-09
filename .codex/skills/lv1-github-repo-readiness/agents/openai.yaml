@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lv1 GitHub Repo Readiness"
+  short_description: "Audit or improve repos for private or public GitHub use"
+  default_prompt: "Use $lv1-github-repo-readiness to audit the repo for private or public GitHub readiness, surface blockers first, make safe low-risk improvements when appropriate, and summarize the next moves."
+
+policy:
+  allow_implicit_invocation: true

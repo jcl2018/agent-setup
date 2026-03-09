@@ -1,0 +1,15 @@
+interface:
+  display_name: "Lv1 Figma Implement Design"
+  short_description: "Implement Figma designs with shared workflows and fidelity checks"
+  default_prompt: "Use $lv1-figma-implement-design to inspect the target repo, pull Figma design context, implement the design with repo conventions, validate fidelity, and summarize the result."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "figma"
+      description: "Figma MCP server"
+      transport: "streamable_http"
+      url: "https://mcp.figma.com/mcp"
+
+policy:
+  allow_implicit_invocation: true
