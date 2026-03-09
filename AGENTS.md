@@ -25,6 +25,8 @@ These are active home-level skills. Use them when the task matches, even if the 
 - `lv1-feature-dev`: implement scoped feature work
 - `lv1-defect-fix`: diagnose and fix bugs or regressions
 - `lv1-code-review`: review diffs for correctness, regressions, and test gaps
+- `lv1-figma-implement-design`: implement Figma-driven UI work with shared feature workflow discipline and strong visual-fidelity checks across repos
+- `lv1-github-repo-readiness`: audit or improve a repo for private or public GitHub use, publication prep, and contributor experience across repos
 If the user seems unsure what to ask for, briefly surface the most relevant skill name and what it is for.
 
 ## Layering Rule
