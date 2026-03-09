@@ -15,7 +15,6 @@ Reduce folder overhead by giving the home-root Copilot setup one shared routing 
    - `lv1-feature-dev`
    - `lv1-defect-fix`
    - `lv1-code-review`
-   - `lv1-figma-implement-design`
    - `lv1-github-repo-readiness`
 4. Repo-specific agents
    Keep these thin and compose them from the layers above.
@@ -38,7 +37,6 @@ Reduce folder overhead by giving the home-root Copilot setup one shared routing 
 - Repo and skill setup work: `lv0-instruction-core` + `lv0-repo-onboarding` + `lv0-skill-onboarding`
 - Code cleanup with no behavior change: `lv0-instruction-core` + `lv0-code-polisher`
 - Feature plus docs or PRDs: `lv0-instruction-core` + `lv1-feature-dev` + optional `lv0-doc-writer` when the task needs a stronger PRD or other feature documentation
-- Design-led UI implementation: `lv0-instruction-core` + `lv1-figma-implement-design` + optional repo-specific `lv2` wrapper
 - GitHub hardening or publication prep: `lv0-instruction-core` + `lv1-github-repo-readiness` + optional `lv0-doc-writer`
 - New repo-specific feature agent: `lv0-instruction-core` + one `lv0` specialist + one repo-specific `lv2` wrapper
 

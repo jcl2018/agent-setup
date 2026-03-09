@@ -19,7 +19,6 @@
 - `lv1-feature-dev`
 - `lv1-defect-fix`
 - `lv1-code-review`
-- `lv1-figma-implement-design`
 - `lv1-github-repo-readiness`
 
 ## Layer Prefixes

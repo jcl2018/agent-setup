@@ -12,6 +12,12 @@ Capture completed or meaningful in-progress work so future sessions can resume w
 ## Entries
 
 ### 2026-03-09
+- Goal: retire the shared Figma design skill from the local repo mirrors because this machine cannot use the Figma integration path.
+- Changed: removed the active Claude `lv1-figma-implement-design` skill file and updated the shared router docs so Claude no longer advertises the Figma capability alongside the aligned Codex and Copilot surfaces.
+- Validation: confirmed `.claude/skills/lv1-figma-implement-design/SKILL.md` is absent and reran a focused scan showing the active Claude discovery docs no longer mention the retired skill.
+- Resume cues: if Figma access returns later, restore the shared skill from git history so the Claude mirror stays aligned with the other tool roots.
+
+### 2026-03-09
 - Goal: ensure the latest shared Figma/GitHub skill and feature-dev PRD workflow commits are fully applied on the local home machine.
 - Changed: confirmed the repo mirror is current with `origin/main` at `8c4e172`, verified the live home copies for every path touched by commits `0d7b736` and `8c4e172`, found that `C:\Users\chang\AGENTS.md` was the only missing target because `scripts/home-mirror.ps1` did not sync root-level managed files, and updated the mirror script so `AGENTS.md` now syncs in both directions.
 - Validation: `git -C E:\Dropbox\project\agent-setup fetch origin --prune`, a file-hash comparison of every path touched by `0d7b736` and `8c4e172` against `C:\Users\chang`, `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1`, and a post-sync compare confirming the targeted home files now match the repo, including `C:\Users\chang\AGENTS.md`.
