@@ -22,13 +22,16 @@ Use this workflow when the task asks for:
 4. Implement the change with scope discipline.
 5. Run checks or describe what could not be run.
 6. Review for regressions, edge cases, and follow-on impacts.
-7. Summarize the result, validation, and remaining risks.
+7. Update `knowledge/progress-tracker.md` with what changed, validation, and resume context.
+8. Add unfinished follow-ups or deferred ideas to `knowledge/future-plan.md`.
+9. Summarize the result, validation, and remaining risks.
 
 ## Output
 The final response should include:
 - what changed
 - important files touched
 - validation status
+- tracker or follow-up docs updated when relevant
 - remaining risks or follow-up suggestions
 
 ## Stop Conditions

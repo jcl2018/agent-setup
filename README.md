@@ -12,6 +12,7 @@ The goal is to keep reusable agent instructions, workflows, templates, checklist
 
 - root instruction files such as `.codex/AGENTS.md`, `.claude/CLAUDE.md`, and `.github/copilot-instructions.md`
 - shared workflows, templates, checklists, and knowledge notes
+- per-repo continuity notes such as `progress-tracker.md` and `future-plan.md`
 - reusable Codex and Claude skills
 - reusable Copilot custom agents and path-specific instructions
 - helper scripts for syncing the managed files to and from your home folder
@@ -52,6 +53,10 @@ The shared setup now uses a simple stack so you do not have to remember every fo
 
 When you add a repo-specific agent later, keep it thin and compose it from the shared layers instead of duplicating the general instructions again.
 
+Each tool root also keeps two living knowledge docs for continuity:
+- `knowledge/progress-tracker.md` for completed context, validation, and resume cues
+- `knowledge/future-plan.md` for unfinished work, deferred ideas, and next-step todos
+
 Step-by-step authoring guides live in:
 - `.codex/knowledge/agent-authoring.md`
 - `.claude/knowledge/agent-authoring.md`
@@ -63,6 +68,7 @@ Ask for the outcome you want, not the internal folders to edit.
 
 - Example outcome requests: "onboard this repo", "create a new lv0 skill for release notes", "fix this bug", "review this diff", or "add this feature and update docs".
 - The agent should decide when to read or update workflows, knowledge notes, templates, checklists, and layered skills.
+- The agent should also keep `knowledge/progress-tracker.md` and `knowledge/future-plan.md` current as work happens.
 - Those folders are meant to be implementation detail for the agent system, not something you need to manage by hand during normal use.
 
 ## Onboarding Process

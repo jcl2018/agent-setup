@@ -1,7 +1,7 @@
 # Repo Map
 
 ## Purpose
-Track the directories and files that are most useful when extending this home-agent mirror.
+Track the directories and files that are most useful when extending this home-agent mirror and resuming work quickly.
 
 ## Top-Level Areas
 - Path: `.codex/`
@@ -9,7 +9,7 @@ Track the directories and files that are most useful when extending this home-ag
   Notes: Keep `.agents-home/skills/` aligned with `skills/`.
 - Path: `.claude/`
   Role: Claude mirror with matching workflows, templates, knowledge, checklists, and skills.
-  Notes: Mirrors most shared content without the extra Codex library copy.
+  Notes: Mirrors most shared content without the extra Codex library copy. The `knowledge/` folder now also carries `progress-tracker.md` and `future-plan.md`.
 - Path: `.github/`
   Role: Copilot instructions and custom agents plus mirrored workflows, templates, and knowledge.
   Notes: `instructions/` are path-specific rules; `agents/` are reusable task wrappers.
@@ -33,4 +33,4 @@ Track the directories and files that are most useful when extending this home-ag
 - Treat actual home runtime state outside the mirrored directories as unmanaged and out of scope for repo edits.
 
 ## Quick Start for Future Sessions
-- Inspect `README.md`, `AGENTS.md`, `.codex/knowledge/agent-stack.md`, and `scripts/home-mirror.ps1` first.
+- Inspect `README.md`, `.claude/CLAUDE.md`, `.claude/knowledge/progress-tracker.md`, `.claude/knowledge/future-plan.md`, `.claude/knowledge/agent-stack.md`, and `scripts/home-mirror.ps1` first.

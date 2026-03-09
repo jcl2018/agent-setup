@@ -1,7 +1,7 @@
 # Repo Map
 
 ## Purpose
-Track the directories and files that are most useful when extending this home-agent mirror.
+Track the directories and files that are most useful when extending this home-agent mirror and resuming work quickly.
 
 ## Top-Level Areas
 - Path: `.codex/`
@@ -12,7 +12,7 @@ Track the directories and files that are most useful when extending this home-ag
   Notes: Mirrors most shared content without the extra Codex library copy.
 - Path: `.github/`
   Role: Copilot instructions and custom agents plus mirrored workflows, templates, and knowledge.
-  Notes: `instructions/` are path-specific rules; `agents/` are reusable task wrappers.
+  Notes: `instructions/` are path-specific rules; `agents/` are reusable task wrappers. The `knowledge/` folder now also carries `progress-tracker.md` and `future-plan.md`.
 - Path: `scripts/`
   Role: Non-destructive sync helpers between the repo and the home folder.
   Notes: `home-mirror.ps1` is the shared implementation used by both sync entry points.
@@ -33,4 +33,4 @@ Track the directories and files that are most useful when extending this home-ag
 - Treat actual home runtime state outside the mirrored directories as unmanaged and out of scope for repo edits.
 
 ## Quick Start for Future Sessions
-- Inspect `README.md`, `AGENTS.md`, `.github/knowledge/agent-stack.md`, and `scripts/home-mirror.ps1` first.
+- Inspect `README.md`, `.github/copilot-instructions.md`, `.github/knowledge/progress-tracker.md`, `.github/knowledge/future-plan.md`, `.github/knowledge/agent-stack.md`, and `scripts/home-mirror.ps1` first.

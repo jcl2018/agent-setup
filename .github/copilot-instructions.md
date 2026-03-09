@@ -15,6 +15,7 @@ This repository is the source-controlled mirror of a home-level AI tooling setup
 - Keep the three tool roots logically aligned unless a tool requires a different wrapper or file format.
 - Use the layered agent model: `lv0-instruction-core` -> optional `lv0` onboarding or specialist helper -> `lv1` task agent -> repo-specific `lv2` wrapper.
 - Prefer outcome-based user requests; the agent should choose and maintain workflows, knowledge notes, templates, checklists, and layered helpers as needed.
+- Keep `knowledge/progress-tracker.md` and `knowledge/future-plan.md` current in each tool root so completed context and open todos survive across sessions.
 - Prefer the smallest safe change that preserves portability across machines.
 - Do not commit auth files, runtime caches, session history, sqlite databases, or machine-local sandbox state.
 - Prefer relative repository paths inside markdown so the mirror stays copyable.

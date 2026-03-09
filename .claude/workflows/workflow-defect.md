@@ -23,7 +23,10 @@ Use this workflow when the task asks for:
 4. Identify the likely cause and choose the smallest reliable fix.
 5. Implement the fix and add or update validation where appropriate.
 6. Run checks, targeted tests, or manual verification.
-7. Review for adjacent regressions and summarize the result.
+7. Review for adjacent regressions.
+8. Update `knowledge/progress-tracker.md` with the issue, fix, validation, and resume cues.
+9. Add unfinished follow-ups, monitoring items, or deferred work to `knowledge/future-plan.md`.
+10. Summarize the result.
 
 ## Output
 The final response should include:
@@ -31,6 +34,7 @@ The final response should include:
 - likely cause
 - fix approach
 - validation performed
+- tracker or follow-up docs updated when relevant
 - remaining risk or monitoring notes
 
 ## Stop Conditions

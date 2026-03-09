@@ -21,13 +21,15 @@ Use this workflow when the task asks for:
 3. Map major directories to responsibilities and owners if available.
 4. Identify how to run, test, and verify typical changes.
 5. Call out risky areas, generated content, and likely override points.
-6. Summarize the repo map and practical next steps for future work.
+6. Create or refresh `knowledge/progress-tracker.md` and `knowledge/future-plan.md` so future sessions can resume cleanly.
+7. Summarize the repo map and practical next steps for future work.
 
 ## Output
 The final response should include:
 - a concise repo map
 - important commands
 - notable conventions or danger zones
+- tracking docs initialized or updated
 - recommended next places to look
 
 ## Stop Conditions

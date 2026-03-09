@@ -9,7 +9,7 @@ Use the shared home-root Codex system in `~/.codex` as a self-sufficient setup f
 - `~/.codex/workflows/` holds the task process to follow.
 - `~/.codex/templates/` holds reusable response shapes.
 - `~/.codex/checklists/` holds lightweight quality gates.
-- `~/.codex/knowledge/` holds durable notes such as architecture, repo maps, and test commands.
+- `~/.codex/knowledge/` holds durable notes such as architecture, repo maps, test commands, `progress-tracker.md`, and `future-plan.md`.
 - `~/.codex/skills/` holds actively discoverable Codex skills.
 - `~/.codex/.agents-home/skills/` is a home library copy of the same shared skills.
 
@@ -40,7 +40,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 1. Read `~/.codex/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.codex/workflows/workflow-feature.md`.
-3. Read the relevant notes in `~/.codex/knowledge/`.
+3. Read the relevant notes in `~/.codex/knowledge/`, including `progress-tracker.md` and `future-plan.md`.
 4. Use `~/.codex/templates/plan-template.md` when the task is large enough to benefit from a short plan.
 5. Validate against `~/.codex/checklists/feature-validation.md` and `~/.codex/checklists/post-edit-checklist.md`.
 
@@ -48,7 +48,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 1. Read `~/.codex/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.codex/workflows/workflow-defect.md`.
-3. Read the relevant notes in `~/.codex/knowledge/`.
+3. Read the relevant notes in `~/.codex/knowledge/`, including `progress-tracker.md` and `future-plan.md`.
 4. Use `~/.codex/templates/defect-report-template.md` when a written diagnosis is useful.
 5. Validate against `~/.codex/checklists/bugfix-verification.md` and `~/.codex/checklists/post-edit-checklist.md`.
 
@@ -56,7 +56,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 1. Read `~/.codex/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.codex/workflows/workflow-code-review.md`.
-3. Read the relevant notes in `~/.codex/knowledge/`.
+3. Read the relevant notes in `~/.codex/knowledge/`, including `progress-tracker.md` and `future-plan.md`.
 4. Use `~/.codex/templates/review-template.md` when a structured review write-up helps.
 5. Present findings first, ordered by severity, with file references when possible.
 
@@ -64,7 +64,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 1. Read `~/.codex/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.codex/workflows/workflow-onboarding.md`.
-3. Read and update `~/.codex/knowledge/repo-map.md`, `architecture.md`, `test-commands.md`, `agent-stack.md`, and `agent-authoring.md` when useful.
+3. Read and update `~/.codex/knowledge/repo-map.md`, `architecture.md`, `test-commands.md`, `agent-stack.md`, `agent-authoring.md`, `progress-tracker.md`, and `future-plan.md` when useful.
 4. Route into `~/.codex/skills/lv0-skill-onboarding/SKILL.md` when the repo itself is an agent or skill system.
 5. Summarize the repo map, important commands, risky areas, and next files to inspect.
 
@@ -81,6 +81,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 - Treat workflows, templates, checklists, and knowledge folders as agent-owned implementation detail; users should be able to request outcomes directly.
 - Reuse the shared workflows, templates, checklists, and knowledge files instead of inventing a new process each time.
 - Use the layered stack in `~/.codex/knowledge/agent-stack.md` before adding new skills or templates.
+- Keep `~/.codex/knowledge/progress-tracker.md` and `~/.codex/knowledge/future-plan.md` updated for every repo; save completed context in the progress tracker and unfinished work or todos in the future plan.
 - Call out validation clearly, including when it could not be run.
 - Keep summaries concise and practical.
 
@@ -88,3 +89,4 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 - When a shared skill is updated, keep the active copy in `~/.codex/skills/` aligned with the library copy in `~/.codex/.agents-home/skills/`.
 - Add repo-specific facts to `~/.codex/knowledge/` so future sessions start with better context.
+- Bootstrap `progress-tracker.md` and `future-plan.md` during repo onboarding if they do not exist yet.
