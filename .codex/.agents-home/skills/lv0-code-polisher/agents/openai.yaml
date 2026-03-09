@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lv0 Code Polisher"
+  short_description: "Clean up code without changing intended behavior"
+  default_prompt: "Use $lv0-code-polisher to improve code clarity, structure, and maintainability while preserving intended behavior and validating the result."
+
+policy:
+  allow_implicit_invocation: true

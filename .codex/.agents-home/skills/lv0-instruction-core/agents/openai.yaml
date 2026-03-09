@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lv0 Instruction Core"
+  short_description: "Choose the right Codex workflow, template, checklist, and skill stack"
+  default_prompt: "Use $lv0-instruction-core to route the task through the shared Codex layers, pick the smallest safe skill stack, and summarize what shared assets should be used."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lv1 Feature Dev"
+  short_description: "Implement scoped feature work with shared Codex workflows"
+  default_prompt: "Use $lv1-feature-dev to inspect context, plan the smallest safe feature change, implement it, validate it, and summarize the result."
+
+policy:
+  allow_implicit_invocation: true

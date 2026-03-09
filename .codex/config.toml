@@ -1,0 +1,8 @@
+model = "gpt-5.4"
+model_reasoning_effort = "xhigh"
+
+[windows]
+sandbox = "elevated"
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
