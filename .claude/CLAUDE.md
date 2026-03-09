@@ -21,7 +21,7 @@ These are active home-level skills. Use them when the task matches, even if the 
 - `lv0-skill-onboarding`: guide creation and extension of shared lv0, lv1, and repo-specific lv2 skills
 - `lv0-code-polisher`: improve code quality and maintainability without changing intended behavior
 - `lv0-doc-writer`: write or refine technical documentation from verified repo facts
-- `lv1-feature-dev`: implement scoped feature work
+- `lv1-feature-dev`: implement scoped feature work and capture PRDs when requirements need to be recorded
 - `lv1-defect-fix`: diagnose and fix bugs or regressions
 - `lv1-code-review`: review diffs for correctness, regressions, and test gaps
 - `lv1-figma-implement-design`: implement Figma-driven UI work with shared feature workflow discipline and strong visual-fidelity checks across repos
@@ -42,7 +42,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 1. Read `~/.claude/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.claude/workflows/workflow-feature.md`.
 3. Read the relevant notes in `~/.claude/knowledge/`, including `progress-tracker.md` and `future-plan.md`.
-4. Use `~/.claude/templates/plan-template.md` when the task is large enough to benefit from a short plan.
+4. Use `~/.claude/templates/plan-template.md` when the task is large enough to benefit from a short plan, and `~/.claude/templates/prd-template.md` when requirements, APIs, use cases, or acceptance criteria should be captured during the task.
 5. Validate against `~/.claude/checklists/feature-validation.md` and `~/.claude/checklists/post-edit-checklist.md`.
 
 ### Defect fixing

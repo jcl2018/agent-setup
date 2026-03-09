@@ -12,6 +12,12 @@ Capture completed or meaningful in-progress work so future sessions can resume w
 ## Entries
 
 ### 2026-03-09
+- Goal: teach the shared `lv1-feature-dev` flow to capture lightweight PRDs when feature work surfaces requirements, APIs, or use cases.
+- Changed: updated the feature-dev skill, feature workflow, feature-validation checklist, top-level routing docs, and agent-stack notes across `.codex`, `.claude`, and `.github`; added a reusable `prd-template.md` to each tool root; updated the Codex picker prompt and home-library mirror so feature work can create or update PRDs alongside implementation.
+- Validation: `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1 -WhatIf`, `Get-FileHash .codex\skills\lv1-feature-dev\SKILL.md, .codex\.agents-home\skills\lv1-feature-dev\SKILL.md, .codex\skills\lv1-feature-dev\agents\openai.yaml, .codex\.agents-home\skills\lv1-feature-dev\agents\openai.yaml | Format-Table -AutoSize`, `Get-ChildItem AGENTS.md, .codex, .claude, .github -Recurse -File | Select-String -Pattern 'prd-template|PRD' | Select-Object Path, LineNumber, Line | Format-Table -AutoSize`, and `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1`.
+- Resume cues: feature work should now prefer an existing PRD or docs location when one exists and fall back to `docs/prd/<feature-name>.md` with the shared template when requirements need to be recorded.
+
+### 2026-03-09
 - Goal: reconcile the Dropbox repo's local `main` with `origin/main` after fixing the object-store permission issue.
 - Changed: confirmed the local commit `5c8b9d8` and remote commit `ee38fb1` had the same parent and tree, created backup branch `codex/main-before-reconcile` at the local-only commit, and moved `main` to `ee38fb1` so the working branch matches `origin/main` again without disturbing the uncommitted tracker updates.
 - Validation: `git -C E:\Dropbox\project\agent-setup diff --stat 5c8b9d8 ee38fb1`, `git -C E:\Dropbox\project\agent-setup cherry -v origin/main main`, `git -C E:\Dropbox\project\agent-setup update-ref refs/heads/main ee38fb1 5c8b9d8`, and `git -C E:\Dropbox\project\agent-setup status -sb`.

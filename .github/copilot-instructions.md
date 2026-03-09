@@ -14,6 +14,7 @@ This repository is the source-controlled mirror of a home-level AI tooling setup
 - Treat this repository as the source of truth for reusable home-root AI configuration.
 - Keep the three tool roots logically aligned unless a tool requires a different wrapper or file format.
 - Use the layered agent model: `lv0-instruction-core` -> optional `lv0` onboarding or specialist helper -> `lv1` task agent -> repo-specific `lv2` wrapper.
+- When feature work introduces or changes requirements, APIs, or use cases, capture them in a PRD in the repo's docs area and keep that document aligned with implementation.
 - Prefer outcome-based user requests; the agent should choose and maintain workflows, knowledge notes, templates, checklists, and layered helpers as needed.
 - Keep `knowledge/progress-tracker.md` and `knowledge/future-plan.md` current in each tool root so completed context and open todos survive across sessions.
 - Prefer the smallest safe change that preserves portability across machines.
