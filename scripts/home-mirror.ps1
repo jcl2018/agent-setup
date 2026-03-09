@@ -75,6 +75,10 @@ $toolAliases = @{
     github = "copilot"
 }
 
+$rootItems = @(
+    "AGENTS.md"
+)
+
 function Resolve-RequestedTools {
     param([string[]]$Requested)
 
@@ -166,6 +170,20 @@ foreach ($toolName in $requestedTools) {
         if (Copy-ManagedItem -SourceRoot $sourceRoot -DestinationRoot $destinationRoot -RelativePath $item) {
             $copied += 1
         }
+    }
+}
+
+if ($Direction -eq "to-home") {
+    $rootSourceRoot = $RepoRoot
+    $rootDestinationRoot = $HomeRoot
+} else {
+    $rootSourceRoot = $HomeRoot
+    $rootDestinationRoot = $RepoRoot
+}
+
+foreach ($item in $rootItems) {
+    if (Copy-ManagedItem -SourceRoot $rootSourceRoot -DestinationRoot $rootDestinationRoot -RelativePath $item) {
+        $copied += 1
     }
 }
 

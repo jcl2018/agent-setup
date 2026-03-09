@@ -12,6 +12,12 @@ Capture completed or meaningful in-progress work so future sessions can resume w
 ## Entries
 
 ### 2026-03-09
+- Goal: ensure the latest shared Figma/GitHub skill and feature-dev PRD workflow commits are fully applied on the local home machine.
+- Changed: confirmed the repo mirror is current with `origin/main` at `8c4e172`, verified the live home copies for every path touched by commits `0d7b736` and `8c4e172`, found that `C:\Users\chang\AGENTS.md` was the only missing target because `scripts/home-mirror.ps1` did not sync root-level managed files, and updated the mirror script so `AGENTS.md` now syncs in both directions.
+- Validation: `git -C E:\Dropbox\project\agent-setup fetch origin --prune`, a file-hash comparison of every path touched by `0d7b736` and `8c4e172` against `C:\Users\chang`, `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1`, and a post-sync compare confirming the targeted home files now match the repo, including `C:\Users\chang\AGENTS.md`.
+- Resume cues: if another shared home-root file needs to travel between the repo mirror and the live machine, add it to the root item list in `scripts/home-mirror.ps1` instead of copying it manually.
+
+### 2026-03-09
 - Goal: teach the shared `lv1-feature-dev` flow to capture lightweight PRDs when feature work surfaces requirements, APIs, or use cases.
 - Changed: updated the feature-dev skill, feature workflow, feature-validation checklist, top-level routing docs, and agent-stack notes across `.codex`, `.claude`, and `.github`; added a reusable `prd-template.md` to each tool root; updated the Codex picker prompt and home-library mirror so feature work can create or update PRDs alongside implementation.
 - Validation: `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1 -WhatIf`, `Get-FileHash .codex\skills\lv1-feature-dev\SKILL.md, .codex\.agents-home\skills\lv1-feature-dev\SKILL.md, .codex\skills\lv1-feature-dev\agents\openai.yaml, .codex\.agents-home\skills\lv1-feature-dev\agents\openai.yaml | Format-Table -AutoSize`, `Get-ChildItem AGENTS.md, .codex, .claude, .github -Recurse -File | Select-String -Pattern 'prd-template|PRD' | Select-Object Path, LineNumber, Line | Format-Table -AutoSize`, and `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1`.
