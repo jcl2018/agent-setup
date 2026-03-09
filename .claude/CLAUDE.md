@@ -9,7 +9,7 @@ Use the shared home-root Claude system in `~/.claude` as a self-sufficient setup
 - `~/.claude/workflows/` holds the task process to follow.
 - `~/.claude/templates/` holds reusable response shapes.
 - `~/.claude/checklists/` holds lightweight quality gates.
-- `~/.claude/knowledge/` holds durable notes such as architecture, repo maps, and test commands.
+- `~/.claude/knowledge/` holds durable notes such as architecture, repo maps, test commands, `progress-tracker.md`, and `future-plan.md`.
 - `~/.claude/skills/` holds actively discoverable Claude skills.
 
 ## Available Skills
@@ -39,7 +39,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 1. Read `~/.claude/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.claude/workflows/workflow-feature.md`.
-3. Read the relevant notes in `~/.claude/knowledge/`.
+3. Read the relevant notes in `~/.claude/knowledge/`, including `progress-tracker.md` and `future-plan.md`.
 4. Use `~/.claude/templates/plan-template.md` when the task is large enough to benefit from a short plan.
 5. Validate against `~/.claude/checklists/feature-validation.md` and `~/.claude/checklists/post-edit-checklist.md`.
 
@@ -47,7 +47,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 1. Read `~/.claude/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.claude/workflows/workflow-defect.md`.
-3. Read the relevant notes in `~/.claude/knowledge/`.
+3. Read the relevant notes in `~/.claude/knowledge/`, including `progress-tracker.md` and `future-plan.md`.
 4. Use `~/.claude/templates/defect-report-template.md` when a written diagnosis is useful.
 5. Validate against `~/.claude/checklists/bugfix-verification.md` and `~/.claude/checklists/post-edit-checklist.md`.
 
@@ -55,7 +55,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 1. Read `~/.claude/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.claude/workflows/workflow-code-review.md`.
-3. Read the relevant notes in `~/.claude/knowledge/`.
+3. Read the relevant notes in `~/.claude/knowledge/`, including `progress-tracker.md` and `future-plan.md`.
 4. Use `~/.claude/templates/review-template.md` when a structured review write-up helps.
 5. Present findings first, ordered by severity, with file references when possible.
 
@@ -63,7 +63,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 1. Read `~/.claude/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.claude/workflows/workflow-onboarding.md`.
-3. Read and update `~/.claude/knowledge/repo-map.md`, `architecture.md`, `test-commands.md`, `agent-stack.md`, and `agent-authoring.md` when useful.
+3. Read and update `~/.claude/knowledge/repo-map.md`, `architecture.md`, `test-commands.md`, `agent-stack.md`, `agent-authoring.md`, `progress-tracker.md`, and `future-plan.md` when useful.
 4. Route into `~/.claude/skills/lv0-skill-onboarding/SKILL.md` when the repo itself is an agent or skill system.
 5. Summarize the repo map, important commands, risky areas, and next files to inspect.
 
@@ -80,6 +80,7 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 - Treat workflows, templates, checklists, and knowledge folders as agent-owned implementation detail; users should be able to request outcomes directly.
 - Reuse the shared workflows, templates, checklists, and knowledge files instead of inventing a new process each time.
 - Use the layered stack in `~/.claude/knowledge/agent-stack.md` before adding new skills or templates.
+- Keep `~/.claude/knowledge/progress-tracker.md` and `~/.claude/knowledge/future-plan.md` updated for every repo; save completed context in the progress tracker and unfinished work or todos in the future plan.
 - Call out validation clearly, including when it could not be run.
 - Keep summaries concise and practical.
 
@@ -87,3 +88,4 @@ If the user seems unsure what to ask for, briefly surface the most relevant skil
 
 - Keep shared workflow, checklist, template, and skill names aligned with the Codex and Copilot mirrors unless the tool requires a different wrapper.
 - Add durable repo facts to `~/.claude/knowledge/` when they will help future sessions.
+- Bootstrap `progress-tracker.md` and `future-plan.md` during repo onboarding if they do not exist yet.

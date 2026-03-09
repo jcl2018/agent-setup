@@ -3,6 +3,7 @@
 ## Files
 - Prefer lowercase kebab-case for general markdown and config docs.
 - Follow existing repo conventions when working inside a project.
+- Reserve `progress-tracker.md` and `future-plan.md` for the standard repo continuity docs in each tool root's `knowledge/` folder.
 
 ## Code Symbols
 - Match the naming style already used in the target language and codebase.

@@ -44,6 +44,7 @@ Explain how to add a new `lv0` or `lv1` Claude skill without breaking the shared
 3. Keep `lv0` skills concern-oriented and keep `lv1` skills task-oriented.
 4. Do not put repo-specific facts into shared `lv0` or `lv1` skills.
 5. Keep the Claude names aligned with Codex and Copilot unless the tool wrapper truly differs.
+6. Shared base instructions and workflows should preserve the standard repo continuity docs: `knowledge/progress-tracker.md` for completed context and `knowledge/future-plan.md` for unfinished work.
 
 ## Example Stacks
 - New reusable test-hardening skill:
@@ -59,4 +60,4 @@ Explain how to add a new `lv0` or `lv1` Claude skill without breaking the shared
 - Run `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1 -WhatIf`
 - Check that the new skill appears under `.claude/skills/`
 - Scan for stale names with `Select-String`
-- If you added a new shared pattern, update the docs that describe the stack
+- If you added a new shared pattern, update the docs that describe the stack and the repo continuity docs if the change affects how context is carried forward

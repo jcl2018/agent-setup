@@ -20,7 +20,7 @@ Reduce folder overhead by giving the home-root Codex system one shared routing m
 
 ## Folder Decision Guide
 - `workflows/`: the process to follow for a task type
-- `knowledge/`: durable facts and repo maps
+- `knowledge/`: durable facts, repo maps, the running `progress-tracker.md`, and the todo-focused `future-plan.md`
 - `templates/`: structured output shapes when extra consistency helps
 - `checklists/`: quality gates before handoff
 - `skills/`: reusable behaviors
@@ -29,7 +29,8 @@ Reduce folder overhead by giving the home-root Codex system one shared routing m
 1. Start with `lv0-instruction-core`.
 2. Add any needed `lv0` onboarding or specialist skill before deeper task work.
 3. Add the narrowest `lv1` task skill that matches the job.
-4. Put repo-specific rules in repo-local knowledge or a thin top-layer skill instead of duplicating shared instructions.
+4. Keep `knowledge/progress-tracker.md` and `knowledge/future-plan.md` in every repo and update them as part of normal task flow.
+5. Put repo-specific rules in repo-local knowledge or a thin top-layer skill instead of duplicating shared instructions.
 
 ## Example Stacks
 - Repo and skill setup work: `lv0-instruction-core` + `lv0-repo-onboarding` + `lv0-skill-onboarding`
@@ -40,4 +41,5 @@ Reduce folder overhead by giving the home-root Codex system one shared routing m
 ## Maintenance Notes
 - When a shared rule changes, update `lv0-instruction-core` first and keep higher-level skills short.
 - When you want a new template or checklist, first check whether the current stack already covers the need.
+- Initialize `progress-tracker.md` and `future-plan.md` when onboarding a repo and keep them current after meaningful work.
 - For a step-by-step creation flow, read `agent-authoring.md`.

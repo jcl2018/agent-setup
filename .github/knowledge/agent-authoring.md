@@ -44,6 +44,7 @@ Explain how to add a new `lv0` or `lv1` Copilot custom agent without breaking th
 3. Keep `lv0` agents concern-oriented and keep `lv1` agents task-oriented.
 4. Do not put repo-specific facts into shared `lv0` or `lv1` agents.
 5. Keep the Copilot names aligned with Codex and Claude unless the tool wrapper truly differs.
+6. Shared base instructions and workflows should preserve the standard repo continuity docs: `knowledge/progress-tracker.md` for completed context and `knowledge/future-plan.md` for unfinished work.
 
 ## Example Stacks
 - New reusable test-hardening agent:
@@ -59,4 +60,4 @@ Explain how to add a new `lv0` or `lv1` Copilot custom agent without breaking th
 - Run `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1 -WhatIf`
 - Check that the new file appears under `.github/agents/`
 - Scan for stale names with `Select-String`
-- If you added a new shared pattern, update the docs that describe the stack
+- If you added a new shared pattern, update the docs that describe the stack and the repo continuity docs if the change affects how context is carried forward
