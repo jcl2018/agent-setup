@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lv1 Defect Fix"
+  short_description: "Diagnose and fix bugs with shared Codex workflows"
+  default_prompt: "Use $lv1-defect-fix to understand the issue, identify the likely cause, apply the smallest reliable fix, validate it, and summarize any remaining risk."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,43 @@
+# Agent Stack
+
+## Purpose
+Reduce folder overhead by giving the home-root Copilot setup one shared routing map.
+
+## Layer Order
+1. `lv0-instruction-core`
+   Common routing rules and the folder decision guide. Every other custom agent should read this first.
+2. `lv0` onboarding and specialist agents
+   - `lv0-repo-onboarding`: map a repository and build durable context before deeper work
+   - `lv0-skill-onboarding`: guide creation and extension of shared skills and agents
+   - `lv0-code-polisher`: pure code quality, refactoring, naming, structure, testability, and maintainability work
+   - `lv0-doc-writer`: technical documentation, README updates, runbooks, architecture notes, and usage guides
+3. `lv1` task agents
+   - `lv1-feature-dev`
+   - `lv1-defect-fix`
+   - `lv1-code-review`
+4. Repo-specific agents
+   Keep these thin and compose them from the layers above.
+
+## Folder Decision Guide
+- `workflows/`: the process to follow for a task type
+- `knowledge/`: durable facts and repo maps
+- `templates/`: structured output shapes when extra consistency helps
+- `checklists/`: quality gates before handoff
+- `agents/`: reusable behaviors
+
+## Composition Rules
+1. Start with `lv0-instruction-core`.
+2. Add any needed `lv0` onboarding or specialist agent before deeper task work.
+3. Add the narrowest `lv1` task agent that matches the job.
+4. Put repo-specific rules in repo-local knowledge or a thin top-layer agent instead of duplicating shared instructions.
+
+## Example Stacks
+- Repo and skill setup work: `lv0-instruction-core` + `lv0-repo-onboarding` + `lv0-skill-onboarding`
+- Code cleanup with no behavior change: `lv0-instruction-core` + `lv0-code-polisher`
+- Feature plus docs: `lv0-instruction-core` + `lv1-feature-dev` + `lv0-doc-writer`
+- New repo-specific feature agent: `lv0-instruction-core` + one `lv0` specialist + one repo-specific `lv2` wrapper
+
+## Maintenance Notes
+- When a shared rule changes, update `lv0-instruction-core` first and keep higher-level agents short.
+- When you want a new template or checklist, first check whether the current stack already covers the need.
+- For a step-by-step creation flow, read `agent-authoring.md`.

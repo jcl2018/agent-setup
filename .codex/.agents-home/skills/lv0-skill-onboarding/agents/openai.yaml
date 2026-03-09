@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lv0 Skill Onboarding"
+  short_description: "Guide creation and extension of shared skills and agents"
+  default_prompt: "Use $lv0-skill-onboarding to decide the right layer, scaffold the needed skill or agent files, keep the three tool roots aligned, and validate the result."
+
+policy:
+  allow_implicit_invocation: true

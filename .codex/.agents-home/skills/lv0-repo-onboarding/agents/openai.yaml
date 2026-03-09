@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lv0 Repo Onboarding"
+  short_description: "Build working context for an unfamiliar repository"
+  default_prompt: "Use $lv0-repo-onboarding to map the repo, identify important files and commands, note risky areas, route into skill authoring when relevant, and summarize practical next steps."
+
+policy:
+  allow_implicit_invocation: true
