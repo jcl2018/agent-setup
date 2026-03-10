@@ -26,7 +26,25 @@ function Resolve-RequestedNames {
         [string[]]$Requested
     )
 
-    if ($Requested.Count -eq 0 -or $Requested -contains "all") {
+    $normalizedRequested = New-Object System.Collections.Generic.List[string]
+    foreach ($entry in $Requested) {
+        if ([string]::IsNullOrWhiteSpace($entry)) {
+            continue
+        }
+
+        foreach ($candidate in ($entry -split ",")) {
+            $trimmed = $candidate.Trim()
+            if ([string]::IsNullOrWhiteSpace($trimmed)) {
+                continue
+            }
+
+            if (-not $normalizedRequested.Contains($trimmed)) {
+                $normalizedRequested.Add($trimmed)
+            }
+        }
+    }
+
+    if ($normalizedRequested.Count -eq 0 -or $normalizedRequested -contains "all") {
         return @($CatalogItems)
     }
 
@@ -36,14 +54,14 @@ function Resolve-RequestedNames {
     }
 
     $resolved = New-Object System.Collections.Generic.List[object]
-    foreach ($entry in $Requested) {
+    foreach ($entry in $normalizedRequested) {
         if (-not $catalogByName.ContainsKey($entry)) {
             throw "Unknown shared skill '$entry'."
         }
         $resolved.Add($catalogByName[$entry])
     }
 
-    return @($resolved)
+    return @($resolved.ToArray())
 }
 
 function Ensure-Directory {

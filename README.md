@@ -12,6 +12,7 @@ The goal is to keep reusable shared context in version control once, while still
 ## What This Repo Tracks
 
 - the shared cross-tool layer in `.ai_shared/`
+- the canonical shared skill definitions in `.ai_shared/skills/`
 - root instruction files such as `.codex/AGENTS.md`, `.claude/CLAUDE.md`, and `.github/copilot-instructions.md`
 - reusable Codex and Claude skills
 - reusable Copilot custom agents and path-specific instructions
@@ -36,6 +37,7 @@ The goal is to keep reusable shared context in version control once, while still
 ```
 
 - `.ai_shared/` is the canonical shared layer for workflows, templates, checklists, knowledge, examples, and optional shared tasks.
+- `.ai_shared/skills/` holds the canonical shared skill definitions that feed the generated Codex, Claude, and Copilot wrappers.
 - `.codex/` holds Codex-native wrappers and config.
 - `.claude/` holds Claude-native wrappers and config.
 - `.github/` holds Copilot-native wrappers, agents, and path-specific instructions.
@@ -44,6 +46,7 @@ The goal is to keep reusable shared context in version control once, while still
 ## Home Vs Repo-Local
 
 - Home `~/.ai_shared/` is for reusable cross-repo shared defaults.
+- Home `~/.ai_shared/skills/` is for canonical shared skill definitions that should stay aligned with the generated tool wrappers.
 - Repo-local `.ai_shared/` is the canonical shared context for that repository across all tools.
 - `progress-tracker.md` and `future-plan.md` are always repo-local continuity docs under `.ai_shared/knowledge/`.
 - Repo-specific templates, checklists, workflows, knowledge notes, and other shared context should live in that repo's `.ai_shared/`.
@@ -64,9 +67,10 @@ When a tool needs context, use this order:
 The shared setup uses a simple stack so you do not have to remember every folder by hand:
 
 1. `lv0-instruction-core` is the shared routing layer.
-2. `lv0` onboarding and specialist helpers handle reusable foundation work.
-3. `lv1` task wrappers such as `lv1-feature-dev`, `lv1-defect-fix`, and `lv1-code-review` sit on top.
-4. Repo-specific `lv2` wrappers stay thin and compose the shared layers when a repo needs extra tool-native behavior.
+2. `lv0-home-auditor` is the weekly home-folder alignment helper that should run on the first repo request of a new calendar week when no audit is logged yet.
+3. Other `lv0` onboarding and specialist helpers handle reusable foundation work.
+4. `lv1` task wrappers such as `lv1-feature-dev`, `lv1-defect-fix`, and `lv1-code-review` sit on top.
+5. Repo-specific `lv2` wrappers stay thin and compose the shared layers when a repo needs extra tool-native behavior.
 
 Shared authoring guidance lives in `.ai_shared/knowledge/agent-authoring.md`, `.ai_shared/knowledge/agent-stack.md`, and `.ai_shared/knowledge/naming-conventions.md`.
 
@@ -75,6 +79,7 @@ Shared authoring guidance lives in `.ai_shared/knowledge/agent-authoring.md`, `.
 Ask for the outcome you want, not the internal folders to edit.
 
 - Example outcome requests: "onboard this repo", "create a new lv0 skill for release notes", "fix this bug", "review this diff", or "add this feature and update docs".
+- Example outcome requests also include "audit the home setup" or "check whether the local agent folders are aligned".
 - The agent should decide when to read or update workflows, knowledge notes, templates, checklists, wrappers, and layered skills.
 - The agent should keep the current repo's `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` current as work happens.
 
@@ -87,6 +92,14 @@ Use `lv0-repo-onboarding` when you are new to a repository or returning after a 
 1. Start from `lv0-instruction-core`.
 2. Run `lv0-repo-onboarding` to map the repo, identify key files and commands, and refresh `.ai_shared/knowledge/`.
 3. If the repository is itself an agent or skill system, continue into `lv0-skill-onboarding`.
+
+### Weekly Home Audit
+
+Use `lv0-home-auditor` on the first request handled in a repo during a new calendar week when that repo's `.ai_shared/knowledge/progress-tracker.md` does not already show a current-week audit.
+
+1. Start from `lv0-instruction-core`.
+2. Run `lv0-home-auditor` to verify shared-folder placement, wrapper sync, shared-path access, and cleanup candidates.
+3. Update the repo continuity docs with the audit result before continuing into the deeper task.
 
 ### Skill Onboarding
 

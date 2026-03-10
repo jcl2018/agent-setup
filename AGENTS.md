@@ -6,6 +6,7 @@ Use the home-root Codex wrapper in `~/.codex` together with the shared context l
 
 ## Shared Directories
 
+- `~/.ai_shared/skills/` holds canonical shared skill definitions that generate the tool-specific wrappers.
 - `~/.ai_shared/workflows/` holds reusable shared task processes.
 - `~/.ai_shared/templates/` holds reusable shared response shapes.
 - `~/.ai_shared/checklists/` holds reusable shared quality gates.
@@ -18,7 +19,8 @@ Use the home-root Codex wrapper in `~/.codex` together with the shared context l
 ## Layering Rule
 
 - Start with `lv0-instruction-core`.
-- Add any needed `lv0` helper such as `lv0-repo-onboarding`, `lv0-skill-onboarding`, `lv0-code-polisher`, or `lv0-doc-writer`.
+- On the first chat in a repo during a new calendar week, run `lv0-home-auditor` if `.ai_shared/knowledge/progress-tracker.md` does not already show a current-week audit for that repo.
+- Add any needed `lv0` helper such as `lv0-home-auditor`, `lv0-repo-onboarding`, `lv0-skill-onboarding`, `lv0-code-polisher`, or `lv0-doc-writer`.
 - Add the narrowest `lv1` task skill such as `lv1-feature-dev`, `lv1-defect-fix`, or `lv1-code-review`.
 - Treat `.ai_shared` as the canonical shared-context layer.
 - Treat `.codex` as Codex-specific wrapper/config space only.
@@ -35,6 +37,7 @@ Lookup order:
 These are active home-level skills. Use them when the task matches, even if the user does not mention the skill name explicitly.
 
 - `lv0-instruction-core`: shared routing skill that tells other skills which folders and layers to use
+- `lv0-home-auditor`: weekly home-folder auditor for local config alignment, wrapper sync, access checks, and cleanup candidates
 - `lv0-repo-onboarding`: map an unfamiliar repository and build reusable context before deeper work
 - `lv0-skill-onboarding`: guide creation and extension of shared lv0, lv1, and repo-specific lv2 skills
 - `lv0-code-polisher`: improve code quality and maintainability without changing intended behavior
@@ -88,8 +91,10 @@ These are active home-level skills. Use them when the task matches, even if the 
 
 - Prefer the smallest safe change that satisfies the task.
 - Inspect local context before deciding on an implementation.
+- On the first request handled in a repo during a calendar week, check `.ai_shared/knowledge/progress-tracker.md`; if no `lv0-home-auditor` entry exists for that week, run the weekly home-folder audit and log the result before deeper task work.
 - Treat workflows, templates, checklists, and knowledge folders as agent-owned implementation detail; users should be able to request outcomes directly.
 - Keep repo-specific context, templates, checklists, workflows, and continuity docs in the current repo's `.ai_shared/`.
+- Keep canonical shared skill definitions in `.ai_shared/skills/` and sync the generated wrappers from there.
 - Keep only reusable cross-repo assets in `~/.ai_shared/`.
 - Keep tool-specific wrappers, configs, and native integrations in `.codex/` or `~/.codex/`.
 - Keep `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` updated for the current repo. Do not keep repo continuity docs in `~/.ai_shared/knowledge/`.

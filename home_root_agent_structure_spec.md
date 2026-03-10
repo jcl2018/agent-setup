@@ -37,6 +37,7 @@ Each tool should remain usable on its own, but shared context should only be mai
 ```text
 ~
 |-- .ai_shared/
+|   |-- skills/
 |   |-- workflows/
 |   |-- templates/
 |   |-- checklists/
@@ -63,6 +64,7 @@ Each tool should remain usable on its own, but shared context should only be mai
 ```text
 <repo>/
 |-- .ai_shared/
+|   |-- skills/
 |   |-- workflows/
 |   |-- templates/
 |   |-- checklists/
@@ -99,6 +101,7 @@ When any tool needs instructions or context, resolve in this order:
 
 Use for:
 
+- canonical shared skill definitions
 - shared workflows
 - shared templates
 - shared checklists
@@ -145,10 +148,11 @@ Use for:
 
 Maintain these shared workflows in `.ai_shared/workflows/`:
 
-1. `workflow-feature.md`
-2. `workflow-defect.md`
-3. `workflow-code-review.md`
-4. `workflow-onboarding.md`
+1. `workflow-home-audit.md`
+2. `workflow-feature.md`
+3. `workflow-defect.md`
+4. `workflow-code-review.md`
+5. `workflow-onboarding.md`
 
 ## Shared Template Set
 
@@ -163,6 +167,7 @@ Maintain these shared templates in `.ai_shared/templates/`:
 
 Maintain these shared checklists in `.ai_shared/checklists/`:
 
+- `home-audit-checklist.md`
 - `post-edit-checklist.md`
 - `bugfix-verification.md`
 - `feature-validation.md`
@@ -188,6 +193,7 @@ Repo-local `.ai_shared/knowledge/` should additionally own:
 Use the same logical layers across tools:
 
 - `lv0-instruction-core`
+- `lv0-home-auditor`
 - `lv0` onboarding and specialist helpers
 - `lv1` task wrappers
 - optional thin repo-specific `lv2` wrappers

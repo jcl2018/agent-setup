@@ -9,6 +9,7 @@ Give the home-root AI setup one shared routing map that Codex, Claude, and Copil
    - repo-local tool overrides such as `.codex/`, `.claude/`, and `.github/` when a repo needs tool-specific behavior
 2. Shared `lv0` base and specialist layers
    - `lv0-instruction-core`
+   - `lv0-home-auditor`
    - `lv0-repo-onboarding`
    - `lv0-skill-onboarding`
    - `lv0-code-polisher`
@@ -22,8 +23,8 @@ Give the home-root AI setup one shared routing map that Codex, Claude, and Copil
    Keep these thin and compose them from the shared layers above.
 
 ## Folder Decision Guide
-- `~/.ai_shared/`: shared cross-tool defaults for skills, workflows, templates, checklists, knowledge notes, examples, and tasks
-- `.ai_shared/`: repo-local shared context, shared overrides, and canonical shared skill definitions for the current repository
+- `~/.ai_shared/`: shared cross-tool defaults for workflows, templates, checklists, knowledge notes, examples, and tasks
+- `.ai_shared/`: repo-local shared context and shared overrides for the current repository
 - `~/.codex/`, `~/.claude/`, `~/.github/`: tool-native home wrappers, config, skills, agents, and instructions
 - `.codex/`, `.claude/`, `.github/`: repo-local tool overrides and thin wrappers when a repo needs tool-specific behavior
 
@@ -35,13 +36,15 @@ Give the home-root AI setup one shared routing map that Codex, Claude, and Copil
 
 ## Composition Rules
 1. Start with the current tool's `lv0-instruction-core` wrapper.
-2. Add any needed `lv0` onboarding or specialist layer before deeper task work.
-3. Add the narrowest `lv1` task layer that matches the job.
-4. Keep `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` in every repo and update them as part of normal task flow.
-5. Put repo-specific shared rules, templates, checklists, workflows, and durable notes in repo-local `.ai_shared/`.
-6. Put tool-only behavior, wrapper logic, and config in the matching repo-local tool folder.
+2. On the first request in a repo during a new calendar week, check whether `lv0-home-auditor` is already logged in that repo's `.ai_shared/knowledge/progress-tracker.md`; if not, run it before deeper task work.
+3. Add any needed `lv0` onboarding or specialist layer before deeper task work.
+4. Add the narrowest `lv1` task layer that matches the job.
+5. Keep `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` in every repo and update them as part of normal task flow.
+6. Put repo-specific shared rules, templates, checklists, workflows, and durable notes in repo-local `.ai_shared/`.
+7. Put tool-only behavior, wrapper logic, and config in the matching repo-local tool folder.
 
 ## Example Stacks
+- Weekly home-folder alignment check: tool wrapper + `lv0-instruction-core` + `lv0-home-auditor`
 - Repo and skill setup work: tool wrapper + `lv0-instruction-core` + `lv0-repo-onboarding` + `lv0-skill-onboarding`
 - Code cleanup with no behavior change: tool wrapper + `lv0-instruction-core` + `lv0-code-polisher`
 - Feature plus docs or PRDs: tool wrapper + `lv0-instruction-core` + `lv1-feature-dev` + optional `lv0-doc-writer`
@@ -50,7 +53,6 @@ Give the home-root AI setup one shared routing map that Codex, Claude, and Copil
 
 ## Maintenance Notes
 - When a shared rule changes, update `.ai_shared/` first and keep the tool wrappers short.
-- Canonical shared skill and agent behavior lives in `.ai_shared/skills/`; regenerate `.codex/skills/`, `.claude/skills/`, and `.github/agents/` with `scripts/sync-shared-skills.ps1`.
 - When you want a new template, checklist, workflow, or shared note, put it in `.ai_shared/` unless it is truly tool-specific.
 - Initialize repo-local `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` when onboarding a repo and keep them current after meaningful work.
 - For step-by-step creation rules, read `agent-authoring.md`.

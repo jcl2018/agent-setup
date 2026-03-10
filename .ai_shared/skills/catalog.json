@@ -22,6 +22,13 @@
       "codexDefaultPrompt": "Use $lv0-instruction-core to choose the right shared stack, route context through .ai_shared, keep wrapper-specific behavior thin, and summarize the validation path."
     },
     {
+      "name": "lv0-home-auditor",
+      "displayName": "Lv0 Home Auditor",
+      "description": "Audit the home-folder setup for local config drift, folder placement, wrapper sync, repo-specific weekly checks, and cleanup candidates. Use on the first repo request of each week or whenever the local home setup may be out of alignment.",
+      "codexShortDescription": "Run the weekly home-folder alignment audit",
+      "codexDefaultPrompt": "Use $lv0-home-auditor to run the weekly home-folder alignment audit, verify shared folders and generated wrappers are in sync, check Codex and Copilot access to the shared roots, and summarize cleanup candidates without deleting anything automatically."
+    },
+    {
       "name": "lv0-repo-onboarding",
       "displayName": "Lv0 Repo Onboarding",
       "description": "Build working context for an unfamiliar repository using the shared home-root workflows, templates, checklists, and knowledge notes.",
@@ -55,13 +62,6 @@
       "description": "Implement scoped feature work using the shared home-root workflows, templates, checklists, and knowledge notes. Use when adding behavior, expanding a capability, wiring a new integration, or delivering a user-facing enhancement with controlled scope and clear validation.",
       "codexShortDescription": "Implement scoped feature work and capture PRD details when needed",
       "codexDefaultPrompt": "Use $lv1-feature-dev to inspect context, capture requirements in a PRD when APIs or use cases need to be recorded, plan the smallest safe feature change, implement it, validate it, and summarize the result."
-    },
-    {
-      "name": "lv1-figma-implement-design",
-      "displayName": "Lv1 Figma Implement Design",
-      "description": "Implement Figma-driven UI work using the shared feature workflow and design-context steps. Use when turning a Figma frame, component, or node into repo-appropriate code with strong visual fidelity across multiple repos.",
-      "codexShortDescription": "Implement Figma-driven UI work with fidelity checks",
-      "codexDefaultPrompt": "Use $lv1-figma-implement-design to inspect the target UI, gather reliable Figma context, implement the smallest faithful change, validate fidelity, and summarize any remaining visual gap."
     },
     {
       "name": "lv1-github-repo-readiness",
