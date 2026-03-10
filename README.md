@@ -39,6 +39,14 @@ The goal is to keep reusable agent instructions, workflows, templates, checklist
 - `.github/` holds Copilot repository-wide instructions, path-specific instructions, and custom agents
 - `scripts/` contains safe sync helpers that copy only the managed files
 
+## Shared Vs Repo-Local
+
+- The home folders `~/.codex`, `~/.claude`, and `~/.github` are for reusable cross-repo defaults such as shared workflows, templates, checklists, skills or agents, and authoring notes.
+- In an actual project repo, repo-specific knowledge belongs in that repo's local tool folder such as `.codex/knowledge/`, `.claude/knowledge/`, or `.github/knowledge/`.
+- `progress-tracker.md` and `future-plan.md` are always repo-local continuity docs, not home-folder docs.
+- Repo-specific templates, checklists, workflows, and thin wrappers should live beside that repo's tool folder when they need to differ from the shared defaults.
+- The sync scripts intentionally skip `progress-tracker.md` and `future-plan.md` when copying `knowledge/` into the live home folders so stale home-level continuity files do not come back.
+
 ## Layered Agent Model
 
 The shared setup now uses a simple stack so you do not have to remember every folder first:
@@ -53,7 +61,7 @@ The shared setup now uses a simple stack so you do not have to remember every fo
 
 When you add a repo-specific agent later, keep it thin and compose it from the shared layers instead of duplicating the general instructions again.
 
-Each tool root also keeps two living knowledge docs for continuity:
+Each repo-local tool root also keeps two living knowledge docs for continuity:
 - `knowledge/progress-tracker.md` for completed context, validation, and resume cues
 - `knowledge/future-plan.md` for unfinished work, deferred ideas, and next-step todos
 
@@ -68,7 +76,7 @@ Ask for the outcome you want, not the internal folders to edit.
 
 - Example outcome requests: "onboard this repo", "create a new lv0 skill for release notes", "fix this bug", "review this diff", or "add this feature and update docs".
 - The agent should decide when to read or update workflows, knowledge notes, templates, checklists, and layered skills.
-- The agent should also keep `knowledge/progress-tracker.md` and `knowledge/future-plan.md` current as work happens.
+- The agent should also keep the current repo's `knowledge/progress-tracker.md` and `knowledge/future-plan.md` current as work happens.
 - Those folders are meant to be implementation detail for the agent system, not something you need to manage by hand during normal use.
 
 ## Onboarding Process

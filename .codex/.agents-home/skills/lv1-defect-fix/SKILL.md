@@ -13,11 +13,11 @@ Use the shared home-root Codex files to reason about defects, prefer root-cause 
 
 1. Read `~/.codex/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.codex/workflows/workflow-defect.md`.
-3. Read the most relevant shared context from `~/.codex/knowledge/`, especially `architecture.md`, `repo-map.md`, and `test-commands.md`.
-4. Use `~/.codex/templates/defect-report-template.md` when the issue needs a written diagnosis or handoff note.
+3. Read the most relevant repo-local context from `.codex/knowledge/`, especially `architecture.md`, `repo-map.md`, and `test-commands.md`. Use `~/.codex/knowledge/` only for shared cross-repo guidance when the repo has no local equivalent.
+4. Use `.codex/templates/defect-report-template.md` when the repo defines one and the issue needs a written diagnosis or handoff note; otherwise use `~/.codex/templates/defect-report-template.md`.
 5. Reproduce the issue when possible, or explain why reproduction is not available.
 6. Apply the smallest reliable fix that addresses the likely cause.
-7. Validate against `~/.codex/checklists/bugfix-verification.md` and `~/.codex/checklists/post-edit-checklist.md`.
+7. Validate against repo-local `.codex/checklists/bugfix-verification.md` and `.codex/checklists/post-edit-checklist.md` when the repo defines them; otherwise use the shared `~/.codex/checklists/bugfix-verification.md` and `~/.codex/checklists/post-edit-checklist.md`.
 8. Summarize the issue, likely cause, fix, validation, and remaining risk.
 
 ## Output Shape

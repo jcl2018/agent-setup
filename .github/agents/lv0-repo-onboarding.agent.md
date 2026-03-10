@@ -7,7 +7,7 @@ Use this agent when the task is to map a repo, find important files or commands,
 
 1. Read `.github/agents/lv0-instruction-core.agent.md`.
 2. Read `.github/workflows/workflow-onboarding.md`.
-3. Read and update the most relevant notes in `.github/knowledge/`, especially `repo-map.md`, `architecture.md`, `test-commands.md`, `agent-stack.md`, `progress-tracker.md`, and `future-plan.md`.
+3. Read shared authoring notes from the home mirror when needed, then read and update the repo-local `.github/knowledge/repo-map.md`, `architecture.md`, `test-commands.md`, `progress-tracker.md`, and `future-plan.md`.
 4. If `progress-tracker.md` or `future-plan.md` is missing, create it before deeper task work.
 5. Identify important manifests, configs, entry points, and validation commands.
 6. Map major directories to responsibilities and call out risky or generated areas.

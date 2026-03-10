@@ -18,7 +18,7 @@ This skill supports both private and public repos:
 
 1. Read `~/.codex/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.codex/workflows/workflow-code-review.md` for the audit-first pass.
-3. Read the most relevant repo context from `~/.codex/knowledge/`, especially `repo-map.md`, `test-commands.md`, `progress-tracker.md`, and `future-plan.md`.
+3. Read the most relevant repo-local context from `.codex/knowledge/`, especially `repo-map.md`, `test-commands.md`, `progress-tracker.md`, and `future-plan.md`. Use `~/.codex/knowledge/` only for shared cross-repo guidance when the repo has no local equivalent.
 4. Inspect the repo surface:
    - `git status --short --branch`
    - `git ls-files`
@@ -42,7 +42,7 @@ This skill supports both private and public repos:
 10. Validate the result:
    - use the code-review workflow when the work is findings-first
    - use the feature workflow and its checklists if you implement fixes in the same pass
-11. Update `~/.codex/knowledge/progress-tracker.md` and `~/.codex/knowledge/future-plan.md` when the shared workflow changes or follow-up repo work remains.
+11. Update `.codex/knowledge/progress-tracker.md` and `.codex/knowledge/future-plan.md` for repo-local continuity when the shared workflow changes or follow-up repo work remains.
 
 ## Output Shape
 

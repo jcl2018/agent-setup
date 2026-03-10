@@ -13,8 +13,8 @@ Use the shared home-root Codex files to keep reviews focused on findings, risk, 
 
 1. Read `~/.codex/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.codex/workflows/workflow-code-review.md`.
-3. Read the most relevant shared context from `~/.codex/knowledge/`, especially `architecture.md`, `repo-map.md`, and `coding-standards.md`.
-4. Use `~/.codex/templates/review-template.md` when a structured written review is helpful.
+3. Read the most relevant repo-local context from `.codex/knowledge/`, especially `architecture.md`, `repo-map.md`, and `coding-standards.md`. Use `~/.codex/knowledge/` only for shared cross-repo guidance when the repo has no local equivalent.
+4. Use `.codex/templates/review-template.md` when the repo defines one and a structured written review is helpful; otherwise use `~/.codex/templates/review-template.md`.
 5. Inspect the intended behavior alongside the surrounding code, not just the changed lines.
 6. Prioritize findings by severity and confidence.
 7. Call out missing or weak validation explicitly.

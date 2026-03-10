@@ -7,14 +7,14 @@ description: Build working context for an unfamiliar repository using the shared
 
 ## Overview
 
-Use the shared home-root Claude files to build fast, reusable repository context before deeper implementation or review work.
+Use the shared home-root Claude files to build fast, reusable repository context before deeper implementation or review work while keeping repo-specific notes inside the current repository.
 
 ## Workflow
 
 1. Read `~/.claude/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.claude/workflows/workflow-onboarding.md`.
-3. Read and update the most relevant shared notes in `~/.claude/knowledge/`, especially `repo-map.md`, `architecture.md`, `test-commands.md`, `agent-stack.md`, `progress-tracker.md`, and `future-plan.md`.
-4. If `progress-tracker.md` or `future-plan.md` is missing, create it before deeper task work.
+3. Read shared cross-repo notes in `~/.claude/knowledge/` when needed, then read and update the repo-local `.claude/knowledge/repo-map.md`, `architecture.md`, `test-commands.md`, `progress-tracker.md`, and `future-plan.md`.
+4. If repo-local `progress-tracker.md` or `future-plan.md` is missing, create it before deeper task work.
 5. Identify the main manifests, configs, entry points, and validation commands.
 6. Map the major directories to responsibilities and call out danger zones or generated areas.
 7. If the repo itself exists to define reusable skills or agents, also read `~/.claude/knowledge/agent-authoring.md` and route into `lv0-skill-onboarding` for the creation work.

@@ -1,7 +1,7 @@
 # Agent Stack
 
 ## Purpose
-Reduce folder overhead by giving the home-root Claude system one shared routing map.
+Reduce folder overhead by giving the home-root Claude system one shared routing map while keeping repo-local continuity and overrides in each repository.
 
 ## Layer Order
 1. `lv0-instruction-core`
@@ -20,18 +20,17 @@ Reduce folder overhead by giving the home-root Claude system one shared routing 
    Keep these thin and compose them from the layers above.
 
 ## Folder Decision Guide
-- `workflows/`: the process to follow for a task type
-- `knowledge/`: durable facts, repo maps, the running `progress-tracker.md`, and the todo-focused `future-plan.md`
-- `templates/`: structured output shapes when extra consistency helps
-- `checklists/`: quality gates before handoff
-- `skills/`: reusable behaviors
+- `~/.claude/workflows/`, `~/.claude/templates/`, `~/.claude/checklists/`, and `~/.claude/skills/`: reusable shared defaults
+- `~/.claude/knowledge/`: shared cross-repo system notes such as `agent-stack.md`, `agent-authoring.md`, and naming rules
+- `.claude/knowledge/`: repo-local durable facts, repo maps, the running `progress-tracker.md`, and the todo-focused `future-plan.md`
+- `.claude/templates/`, `.claude/checklists/`, `.claude/workflows/`, and thin repo-local `.claude/skills/`: repo-specific overrides when this repo needs different behavior
 
 ## Composition Rules
 1. Start with `lv0-instruction-core`.
 2. Add any needed `lv0` onboarding or specialist skill before deeper task work.
 3. Add the narrowest `lv1` task skill that matches the job.
-4. Keep `knowledge/progress-tracker.md` and `knowledge/future-plan.md` in every repo and update them as part of normal task flow.
-5. Put repo-specific rules in repo-local knowledge or a thin top-layer skill instead of duplicating shared instructions.
+4. Keep `.claude/knowledge/progress-tracker.md` and `.claude/knowledge/future-plan.md` in every repo and update them as part of normal task flow.
+5. Put repo-specific rules, templates, checklists, workflows, and thin wrappers in the repo-local `.claude/` tree instead of the home folder.
 
 ## Example Stacks
 - Repo and skill setup work: `lv0-instruction-core` + `lv0-repo-onboarding` + `lv0-skill-onboarding`
@@ -43,5 +42,5 @@ Reduce folder overhead by giving the home-root Claude system one shared routing 
 ## Maintenance Notes
 - When a shared rule changes, update `lv0-instruction-core` first and keep higher-level skills short.
 - When you want a new template or checklist, first check whether the current stack already covers the need.
-- Initialize `progress-tracker.md` and `future-plan.md` when onboarding a repo and keep them current after meaningful work.
+- Initialize repo-local `.claude/knowledge/progress-tracker.md` and `.claude/knowledge/future-plan.md` when onboarding a repo and keep them current after meaningful work.
 - For a step-by-step creation flow, read `agent-authoring.md`.

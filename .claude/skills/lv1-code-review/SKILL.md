@@ -13,8 +13,8 @@ Use the shared home-root Claude files to keep reviews focused on findings, risk,
 
 1. Read `~/.claude/skills/lv0-instruction-core/SKILL.md`.
 2. Read `~/.claude/workflows/workflow-code-review.md`.
-3. Read the most relevant shared context from `~/.claude/knowledge/`, especially `architecture.md`, `repo-map.md`, and `coding-standards.md`.
-4. Use `~/.claude/templates/review-template.md` when a structured written review is helpful.
+3. Read the most relevant repo-local context from `.claude/knowledge/`, especially `architecture.md`, `repo-map.md`, and `coding-standards.md`. Use `~/.claude/knowledge/` only for shared cross-repo guidance when the repo has no local equivalent.
+4. Use `.claude/templates/review-template.md` when the repo defines one and a structured written review is helpful; otherwise use `~/.claude/templates/review-template.md`.
 5. Inspect the intended behavior alongside the surrounding code, not just the changed lines.
 6. Prioritize findings by severity and confidence.
 7. Call out missing or weak validation explicitly.

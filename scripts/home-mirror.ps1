@@ -79,6 +79,21 @@ $rootItems = @(
     "AGENTS.md"
 )
 
+$excludedKnowledgeFiles = @(
+    "progress-tracker.md",
+    "future-plan.md"
+)
+
+function Get-ExcludedChildNames {
+    param([string]$RelativePath)
+
+    if ($RelativePath -eq "knowledge") {
+        return $excludedKnowledgeFiles
+    }
+
+    return @()
+}
+
 function Resolve-RequestedTools {
     param([string[]]$Requested)
 
@@ -134,8 +149,12 @@ function Copy-ManagedItem {
     $sourceItem = Get-Item -LiteralPath $sourcePath
     if ($sourceItem.PSIsContainer) {
         Ensure-Directory -Path $targetPath
+        $excludedChildNames = Get-ExcludedChildNames -RelativePath $RelativePath
         if ($PSCmdlet.ShouldProcess($targetPath, "Copy directory '$RelativePath'")) {
             foreach ($child in Get-ChildItem -Force -LiteralPath $sourcePath) {
+                if ($excludedChildNames -contains $child.Name) {
+                    continue
+                }
                 Copy-Item -LiteralPath $child.FullName -Destination $targetPath -Recurse -Force
             }
         }

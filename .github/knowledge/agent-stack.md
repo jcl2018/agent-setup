@@ -1,7 +1,7 @@
 # Agent Stack
 
 ## Purpose
-Reduce folder overhead by giving the home-root Copilot setup one shared routing map.
+Reduce folder overhead by giving the home-root Copilot setup one shared routing map while keeping repo-local continuity and overrides in each repository.
 
 ## Layer Order
 1. `lv0-instruction-core`
@@ -20,18 +20,17 @@ Reduce folder overhead by giving the home-root Copilot setup one shared routing 
    Keep these thin and compose them from the layers above.
 
 ## Folder Decision Guide
-- `workflows/`: the process to follow for a task type
-- `knowledge/`: durable facts, repo maps, the running `progress-tracker.md`, and the todo-focused `future-plan.md`
-- `templates/`: structured output shapes when extra consistency helps
-- `checklists/`: quality gates before handoff
-- `agents/`: reusable behaviors
+- `~/.github/workflows/`, `~/.github/templates/`, `~/.github/checklists/`, and `~/.github/agents/`: reusable shared defaults
+- `~/.github/knowledge/`: shared cross-repo system notes such as `agent-stack.md`, `agent-authoring.md`, and naming rules
+- `.github/knowledge/`: repo-local durable facts, repo maps, the running `progress-tracker.md`, and the todo-focused `future-plan.md`
+- `.github/templates/`, `.github/checklists/`, `.github/workflows/`, `.github/instructions/`, and thin repo-local `.github/agents/`: repo-specific overrides when this repo needs different behavior
 
 ## Composition Rules
 1. Start with `lv0-instruction-core`.
 2. Add any needed `lv0` onboarding or specialist agent before deeper task work.
 3. Add the narrowest `lv1` task agent that matches the job.
-4. Keep `knowledge/progress-tracker.md` and `knowledge/future-plan.md` in every repo and update them as part of normal task flow.
-5. Put repo-specific rules in repo-local knowledge or a thin top-layer agent instead of duplicating shared instructions.
+4. Keep `.github/knowledge/progress-tracker.md` and `.github/knowledge/future-plan.md` in every repo and update them as part of normal task flow.
+5. Put repo-specific rules, templates, checklists, workflows, instructions, and thin wrappers in the repo-local `.github/` tree instead of the home folder.
 
 ## Example Stacks
 - Repo and skill setup work: `lv0-instruction-core` + `lv0-repo-onboarding` + `lv0-skill-onboarding`
@@ -43,5 +42,5 @@ Reduce folder overhead by giving the home-root Copilot setup one shared routing 
 ## Maintenance Notes
 - When a shared rule changes, update `lv0-instruction-core` first and keep higher-level agents short.
 - When you want a new template or checklist, first check whether the current stack already covers the need.
-- Initialize `progress-tracker.md` and `future-plan.md` when onboarding a repo and keep them current after meaningful work.
+- Initialize repo-local `.github/knowledge/progress-tracker.md` and `.github/knowledge/future-plan.md` when onboarding a repo and keep them current after meaningful work.
 - For a step-by-step creation flow, read `agent-authoring.md`.

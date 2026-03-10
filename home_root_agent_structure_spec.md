@@ -24,8 +24,8 @@ Each tool must be able to operate as a **complete setup by itself**, without ass
    - Each system should express them in its own native format.
 
 3. **Home-root source of truth**
-   - All personal/global agent configuration should live under the home directory.
-   - Repo-specific overrides can be added later if needed.
+   - Keep reusable cross-repo agent configuration under the home directory.
+   - Keep repo-specific knowledge, continuity docs, templates, checklists, workflows, and thin wrappers in each repo's local tool folder instead of the home folder.
 
 4. **Modular over monolithic**
    - Do not put everything into one giant instruction file.
@@ -227,6 +227,9 @@ Use this for:
 - important commands
 - repo map
 - risky areas / do-not-touch zones
+
+Use the home-folder `knowledge/` only for shared cross-repo system notes.
+Use each repo's local `knowledge/` folder for repo-specific facts, `progress-tracker.md`, `future-plan.md`, and any templates or rules that differ by repository.
 
 This is the long-lived memory layer for each tool.
 

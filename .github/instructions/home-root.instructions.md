@@ -8,6 +8,7 @@ This repository mirrors home-level AI tool configuration.
 - Keep the layered stack aligned across tools: `lv0-instruction-core`, then any needed `lv0` onboarding or specialist helper, then the `lv1` task wrapper and any repo-specific `lv2` wrapper.
 - Prefer outcome-based user requests; the agent should handle the internal workflow, knowledge, template, and checklist choices.
 - Keep `knowledge/progress-tracker.md` and `knowledge/future-plan.md` updated in each tool root; completed context belongs in the progress tracker and unfinished work belongs in the future plan.
+- Keep repo-specific knowledge, templates, checklists, workflows, instructions, and thin wrappers in the current repo's tool root; use the home mirror only for reusable cross-repo defaults.
 - Preserve the distinction between reusable configuration and local runtime state.
 - Avoid machine-specific absolute paths inside docs unless the file is explicitly about the current machine.
 - Prefer small, reviewable edits over broad rewrites.

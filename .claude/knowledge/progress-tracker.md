@@ -12,6 +12,30 @@ Capture completed or meaningful in-progress work so future sessions can resume w
 ## Entries
 
 ### 2026-03-09
+- Goal: finish the continuity-doc migration so old home-level tracker files are removed and cannot be reintroduced by sync.
+- Changed: updated `scripts/home-mirror.ps1` so `knowledge/progress-tracker.md` and `knowledge/future-plan.md` are excluded during home syncs, verified the live home copies matched the repo-local versions, deleted the stale duplicates from `C:\Users\chang\.codex\knowledge\`, `C:\Users\chang\.claude\knowledge\`, and `C:\Users\chang\.github\knowledge\`, and confirmed a fresh sync did not recreate them.
+- Validation: compared file hashes between repo-local and live-home continuity docs before deletion, reran `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1`, and verified the three live home `knowledge/` folders no longer contain `progress-tracker.md` or `future-plan.md`.
+- Resume cues: repo-local continuity docs now exist only in repo folders; if another repo adopts the same pattern, keep the files in that repo and do not add them back to the shared home mirrors.
+
+### 2026-03-09
+- Goal: move repo continuity and other repo-specific guidance out of home knowledge folders and into each repo's local tool folders.
+- Changed: updated the shared lv0 routing docs, repo-onboarding guidance, task skills, and mirrored root instructions across `.codex`, `.claude`, `.github`, and the Codex home-library mirror so `progress-tracker.md`, `future-plan.md`, and other repo-specific knowledge or template overrides now live under the current repo's `.codex/`, `.claude/`, or `.github/` tree instead of the home knowledge folders.
+- Validation: rescanned the repo for stale references to writing `progress-tracker.md` or `future-plan.md` into `~/.codex/knowledge`, `~/.claude/knowledge`, or `~/.github/knowledge`, and spot-checked the updated top-level instructions plus the lv0 and lv1 wrappers in each tool root.
+- Resume cues: shared home folders now act as cross-repo defaults only; when onboarding another repo, create or refresh that repo's local continuity docs and keep repo-specific templates or checklists beside them.
+
+### 2026-03-09
+- Goal: make cross-tool alignment an explicit base-layer rule whenever a shared skill or agent changes in one toolset.
+- Changed: updated `lv0-instruction-core` in `.codex/skills/`, `.codex/.agents-home/skills/`, `.claude/skills/`, and `.github/agents/` so the shared routing layer now requires the matching Codex, Claude, and Copilot skill or agent to be updated or explicitly verified in the same pass.
+- Validation: compared the edited `lv0-instruction-core` wrappers across all three tool roots and the Codex home-library mirror, then synced the managed files with `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1`.
+- Resume cues: treat this as the default shared-maintenance rule going forward; if a future change intentionally leaves one toolset different, call out the wrapper-specific reason in the handoff and tracker entry.
+
+### 2026-03-09
+- Goal: realign the three home tool roots so Codex, Claude, and Copilot expose the same shared framework shape and active layer names.
+- Changed: refreshed `.codex/AGENTS.md` to the current shared routing model with continuity docs and PRD guidance, expanded `.github/copilot-instructions.md` so Copilot now documents the same `lv0` and `lv1` stack and task-routing pattern as the other roots, and removed the leftover Claude `skills/github-open-source-readiness/` folder from both the repo mirror and `C:\Users\chang\.claude` so the active shared capability set cleanly matches `lv1-github-repo-readiness`.
+- Validation: compared the shared folder sets and hashes across `.codex`, `.claude`, and `.github`, confirmed checklists, templates, and workflows are aligned, reran targeted scans for `github-open-source-readiness` and `lv1-github-repo-readiness`, previewed the managed sync with `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1 -WhatIf`, ran the live `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1`, and confirmed the active `lv0` and `lv1` directories now match across all three roots.
+- Resume cues: when another shared layer changes later, update the Codex root instructions, the Claude and Copilot wrappers, and any stale legacy folders in the same pass so the three tool roots stay logically equivalent.
+
+### 2026-03-09
 - Goal: retire the shared Figma design skill from the local repo mirrors because this machine cannot use the Figma integration path.
 - Changed: removed the active Claude `lv1-figma-implement-design` skill file and updated the shared router docs so Claude no longer advertises the Figma capability alongside the aligned Codex and Copilot surfaces.
 - Validation: confirmed `.claude/skills/lv1-figma-implement-design/SKILL.md` is absent and reran a focused scan showing the active Claude discovery docs no longer mention the retired skill.
