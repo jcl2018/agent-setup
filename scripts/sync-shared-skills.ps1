@@ -197,16 +197,6 @@ $toolContexts = @{
         SkillOnboardingRef = "~/.claude/skills/lv0-skill-onboarding/SKILL.md"
         DocWriterRef       = "~/.claude/skills/lv0-doc-writer/SKILL.md"
     }
-    copilot = @{
-        ToolName           = "Copilot"
-        WrapperNoun        = "agent"
-        ToolHomeComponents = "agents and instructions"
-        HomeToolDir        = "~/.github/"
-        RepoToolDir        = ".github/"
-        EntryRef           = ".github/agents/lv0-instruction-core.agent.md"
-        SkillOnboardingRef = ".github/agents/lv0-skill-onboarding.agent.md"
-        DocWriterRef       = ".github/agents/lv0-doc-writer.agent.md"
-    }
 }
 
 $selectedSkills = Resolve-RequestedNames -CatalogItems $catalog -Requested $Name
@@ -273,11 +263,6 @@ foreach ($skill in $selectedSkills) {
                 $skillMarkdownPath = Join-Path $targetSkillRoot "SKILL.md"
                 $skillMarkdown = Build-MarkdownWrapper -Skill $skill -RenderedBody $renderedBody -FrontmatterName $skill.name -SourceRelativePath $sourceRelativePath
                 Write-Utf8File -Path $skillMarkdownPath -Content $skillMarkdown
-            }
-            "copilot" {
-                $targetAgentPath = Join-Path $RepoRoot ".github\agents\$($skill.name).agent.md"
-                $agentMarkdown = Build-MarkdownWrapper -Skill $skill -RenderedBody $renderedBody -FrontmatterName $skill.displayName -SourceRelativePath $sourceRelativePath
-                Write-Utf8File -Path $targetAgentPath -Content $agentMarkdown
             }
         }
     }

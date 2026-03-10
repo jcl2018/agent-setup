@@ -10,7 +10,7 @@ Use this {{WRAPPER_NOUN}} when the job is to create, rename, extend, or standard
 2. Read `~/.ai_shared/knowledge/agent-authoring.md`, `agent-stack.md`, and `naming-conventions.md`.
 3. Decide whether the new behavior belongs in `lv0`, `lv1`, or repo-specific `lv2`.
 4. Inspect the nearest existing canonical definition in `.ai_shared/skills/` and the generated wrappers it feeds before creating new files.
-5. Put shared workflows, templates, checklists, durable notes, and canonical shared skill definitions in `.ai_shared/`, then run `powershell -ExecutionPolicy Bypass -File .\scripts\sync-shared-skills.ps1` so the matching Codex, Claude, and Copilot wrappers regenerate together.
+5. Put shared workflows, templates, checklists, durable notes, and canonical shared skill definitions in `.ai_shared/`, then run `powershell -ExecutionPolicy Bypass -File .\scripts\sync-shared-skills.ps1` so the matching Codex and Claude wrappers regenerate together.
 6. Treat `{{HOME_TOOL_DIR}}` as generated wrapper output for shared skills. Only hand-edit the tool wrapper directly when the change is truly tool-specific and cannot live in `.ai_shared/skills/`.
 7. Validate the result with a wrapper-regeneration run, a sync preview, and a stale-reference scan.
 

@@ -1,7 +1,7 @@
 interface:
   display_name: "Lv0 Home Auditor"
   short_description: "Run the weekly home-folder alignment audit"
-  default_prompt: "Use $lv0-home-auditor to run the weekly home-folder alignment audit, verify shared folders and generated wrappers are in sync, check Codex and Copilot access to the shared roots, and summarize cleanup candidates without deleting anything automatically."
+  default_prompt: "Use $lv0-home-auditor to run the weekly home-folder alignment audit, verify shared folders and generated wrappers are in sync, check Codex and Claude access to the shared roots, and summarize cleanup candidates without deleting anything automatically."
 
 policy:
   allow_implicit_invocation: true

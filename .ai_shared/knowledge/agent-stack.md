@@ -1,12 +1,12 @@
 # Agent Stack
 
 ## Purpose
-Give the home-root AI setup one shared routing map that Codex, Claude, and Copilot can all use without duplicating the same context three times.
+Give the home-root AI setup one shared routing map that Codex and Claude can both use without duplicating the same context twice.
 
 ## Layer Order
 1. Tool entry wrappers
-   - home entrypoints such as `~/.codex/AGENTS.md`, `~/.claude/CLAUDE.md`, and `~/.github/copilot-instructions.md`
-   - repo-local tool overrides such as `.codex/`, `.claude/`, and `.github/` when a repo needs tool-specific behavior
+   - home entrypoints such as `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`
+   - repo-local tool overrides such as `.codex/` and `.claude/` when a repo needs tool-specific behavior
 2. Shared `lv0` base and specialist layers
    - `lv0-instruction-core`
    - `lv0-home-auditor`
@@ -25,8 +25,8 @@ Give the home-root AI setup one shared routing map that Codex, Claude, and Copil
 ## Folder Decision Guide
 - `~/.ai_shared/`: shared cross-tool defaults for workflows, templates, checklists, knowledge notes, examples, and tasks
 - `.ai_shared/`: repo-local shared context and shared overrides for the current repository
-- `~/.codex/`, `~/.claude/`, `~/.github/`: tool-native home wrappers, config, skills, agents, and instructions
-- `.codex/`, `.claude/`, `.github/`: repo-local tool overrides and thin wrappers when a repo needs tool-specific behavior
+- `~/.codex/`, `~/.claude/`: tool-native home wrappers, config, and skills
+- `.codex/`, `.claude/`: repo-local tool overrides and thin wrappers when a repo needs tool-specific behavior
 
 ## Lookup Order
 1. Repo-local tool override
@@ -49,7 +49,7 @@ Give the home-root AI setup one shared routing map that Codex, Claude, and Copil
 - Code cleanup with no behavior change: tool wrapper + `lv0-instruction-core` + `lv0-code-polisher`
 - Feature plus docs or PRDs: tool wrapper + `lv0-instruction-core` + `lv1-feature-dev` + optional `lv0-doc-writer`
 - GitHub hardening or publication prep: tool wrapper + `lv0-instruction-core` + `lv1-github-repo-readiness` + optional `lv0-doc-writer`
-- New repo-specific wrapper: tool wrapper + one `lv0` specialist + one repo-specific override in `.codex/`, `.claude/`, or `.github/`
+- New repo-specific wrapper: tool wrapper + one `lv0` specialist + one repo-specific override in `.codex/` or `.claude/`
 
 ## Maintenance Notes
 - When a shared rule changes, update `.ai_shared/` first and keep the tool wrappers short.

@@ -12,14 +12,14 @@ Use this workflow when:
 ## Inputs
 - repository root and current tool wrapper root
 - current date and the repo's `.ai_shared/knowledge/progress-tracker.md`
-- home roots such as `~/.ai_shared/`, `~/.codex/`, `~/.github/`, and `~/.claude/` when present
+- home roots such as `~/.ai_shared/`, `~/.codex/`, and `~/.claude/` when present
 - active shared workflow, checklist, and skill definitions relevant to the audit
 
 ## Steps
 1. Check whether the current repo already logged an `lv0-home-auditor` run during the current calendar week.
 2. Inspect the repo-local shared and tool-specific folders to confirm canonical file placement and override boundaries.
 3. Compare the canonical shared logic with the generated tool wrappers and top-level entrypoint docs to find drift or stale references.
-4. Verify that the shared home folders and tool roots needed by Codex and Copilot are present and accessible, and include Claude when it exists on the machine.
+4. Verify that the shared home folders and tool roots needed by Codex and Claude are present and accessible.
 5. Identify outdated, dead, retired, conflicted, or misplaced files and folders, then separate cleanup candidates from immediate blockers.
 6. Check repo-specific rules, continuity docs, and local overrides the first time the audit runs in that repo for the week.
 7. Update `.ai_shared/knowledge/progress-tracker.md` with the audit result and move unfinished cleanup work into `future-plan.md`.

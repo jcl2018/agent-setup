@@ -26,7 +26,7 @@
       "displayName": "Lv0 Home Auditor",
       "description": "Audit the home-folder setup for local config drift, folder placement, wrapper sync, repo-specific weekly checks, and cleanup candidates. Use on the first repo request of each week or whenever the local home setup may be out of alignment.",
       "codexShortDescription": "Run the weekly home-folder alignment audit",
-      "codexDefaultPrompt": "Use $lv0-home-auditor to run the weekly home-folder alignment audit, verify shared folders and generated wrappers are in sync, check Codex and Copilot access to the shared roots, and summarize cleanup candidates without deleting anything automatically."
+      "codexDefaultPrompt": "Use $lv0-home-auditor to run the weekly home-folder alignment audit, verify shared folders and generated wrappers are in sync, check Codex and Claude access to the shared roots, and summarize cleanup candidates without deleting anything automatically."
     },
     {
       "name": "lv0-repo-onboarding",

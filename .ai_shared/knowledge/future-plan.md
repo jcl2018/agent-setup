@@ -9,6 +9,7 @@ Capture unfinished work, deferred ideas, and next-step todos that should survive
 - Keep the highest-value near-term work near the top.
 
 ## Current Follow-Ups
+- Decide whether to manually remove the old live-home `.github` wrapper tree so `C:\Users\chang\` matches the repo's new two-tool setup; the sync scripts intentionally leave unmanaged home content in place.
 - After a few real feature tasks use the new PRD flow, decide whether the shared template needs a lighter one-page variant or a repo-level PRD index pattern.
 - After a little soak time, decide whether to keep or remove the backup object store at `E:\Dropbox\project\agent-setup\.git\objects.dropbox-backup-20260309`.
 - Watch whether `progress-tracker.md` and `future-plan.md` need a lighter shared template after a few real tasks use them.

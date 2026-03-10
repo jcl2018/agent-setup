@@ -2,12 +2,11 @@
 
 ## Goal
 
-Keep one canonical shared context layer plus three fully usable tool wrappers:
+Keep one canonical shared context layer plus two fully usable tool wrappers:
 
 - `~/.ai_shared`
 - `~/.codex`
 - `~/.claude`
-- `~/.github`
 
 Each tool should remain usable on its own, but shared context should only be maintained once.
 
@@ -17,7 +16,7 @@ Each tool should remain usable on its own, but shared context should only be mai
    - Put reusable workflows, templates, checklists, knowledge, examples, and optional shared tasks in `.ai_shared`.
 
 2. Thin tool wrappers
-   - Keep `.codex`, `.claude`, and `.github` focused on tool-native wrappers, configs, skills, agents, and auto-attached instructions.
+   - Keep `.codex` and `.claude` focused on tool-native wrappers, configs, and skills.
 
 3. Repo-local before home
    - Use each repo's local `.ai_shared/` for repo-specific shared context.
@@ -53,10 +52,6 @@ Each tool should remain usable on its own, but shared context should only be mai
 |   |-- CLAUDE.md
 |   |-- settings.json
 |   `-- skills/
-`-- .github/
-    |-- copilot-instructions.md
-    |-- agents/
-    `-- instructions/
 ```
 
 ### Repo
@@ -80,20 +75,16 @@ Each tool should remain usable on its own, but shared context should only be mai
 |-- .claude/
 |   |-- CLAUDE.md
 |   `-- optional Claude-only overrides
-`-- .github/
-    |-- copilot-instructions.md
-    |-- agents/
-    `-- optional Copilot-only overrides
 ```
 
 ## Lookup Order
 
 When any tool needs instructions or context, resolve in this order:
 
-1. Repo-local tool override such as `.codex/`, `.claude/`, or `.github/` when the behavior is truly tool-specific.
+1. Repo-local tool override such as `.codex/` or `.claude/` when the behavior is truly tool-specific.
 2. Repo-local `.ai_shared/`.
 3. Home `~/.ai_shared/`.
-4. Home tool wrapper such as `~/.codex/`, `~/.claude/`, or `~/.github/`.
+4. Home tool wrapper such as `~/.codex/` or `~/.claude/`.
 
 ## What Belongs Where
 
@@ -113,8 +104,7 @@ Use for:
 Do not use for:
 
 - tool-native config files
-- Codex/Claude skills or Copilot agents
-- Copilot auto-attached instruction wrappers
+- Codex or Claude skills
 - secrets, caches, or runtime state
 
 ### `.codex`
@@ -134,15 +124,6 @@ Use for:
 - `settings.json`
 - Claude skills
 - Claude-only wrapper behavior
-
-### `.github`
-
-Use for:
-
-- `copilot-instructions.md`
-- custom agents
-- path-specific instruction files
-- Copilot-only wrapper behavior
 
 ## Shared Workflow Set
 
@@ -201,9 +182,9 @@ Use the same logical layers across tools:
 ## Setup Priority
 
 1. Create `.ai_shared/`.
-2. Create the thin tool wrappers under `.codex`, `.claude`, and `.github`.
+2. Create the thin tool wrappers under `.codex` and `.claude`.
 3. Add shared workflows, templates, checklists, and knowledge to `.ai_shared/`.
-4. Add skills and agents to the tool wrappers.
+4. Add skills to the tool wrappers.
 5. Keep repo-local continuity files in each repo's `.ai_shared/knowledge/`.
 
 ## Sync Rules

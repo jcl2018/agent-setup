@@ -56,19 +56,6 @@ $toolSpecs = @{
             "skills"
         )
     }
-    copilot = @{
-        RepoDir = ".github"
-        HomeDir = ".github"
-        Items   = @(
-            "copilot-instructions.md",
-            "instructions",
-            "agents"
-        )
-    }
-}
-
-$toolAliases = @{
-    github = "copilot"
 }
 
 $rootItems = @(
@@ -102,18 +89,14 @@ function Resolve-RequestedTools {
     param([string[]]$Requested)
 
     if ($Requested.Count -eq 0 -or $Requested -contains "all") {
-        return @("codex", "claude", "copilot")
+        return @("codex", "claude")
     }
 
     $resolved = New-Object System.Collections.Generic.List[string]
     foreach ($entry in $Requested) {
         $normalized = $entry.Trim().ToLowerInvariant()
-        if ($toolAliases.ContainsKey($normalized)) {
-            $normalized = $toolAliases[$normalized]
-        }
-
         if (-not $toolSpecs.ContainsKey($normalized)) {
-            throw "Unsupported tool '$entry'. Use one of: all, codex, claude, copilot."
+            throw "Unsupported tool '$entry'. Use one of: all, codex, claude."
         }
 
         if (-not $resolved.Contains($normalized)) {

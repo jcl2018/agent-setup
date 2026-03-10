@@ -25,5 +25,5 @@ Thumbs.db
 .claude/statsig/
 .claude/.credentials.json
 
-# Future Copilot local/runtime state
+# Future GitHub local/runtime state
 .github/cache/

@@ -18,14 +18,12 @@ Explain how to add or extend shared layers without breaking the split between sh
 ## When To Create Tool-Specific Content
 - Put Codex skills in `.codex/skills/` and mirror them into `.codex/.agents-home/skills/`.
 - Put Claude skills in `.claude/skills/`.
-- Put Copilot agents in `.github/agents/`.
-- Put path-specific Copilot behavior in `.github/instructions/` only when auto-attachment by path is actually needed.
 
 ## Files To Create
 
 ### New shared workflow, template, checklist, or note
 1. Create the shared file under `.ai_shared/`.
-2. Update the matching Codex, Claude, and Copilot wrappers so they point at the new shared asset.
+2. Update the matching Codex and Claude wrappers so they point at the new shared asset.
 3. If the change affects stack rules, update `agent-stack.md` and `naming-conventions.md`.
 
 ### New Codex skill
@@ -38,10 +36,6 @@ Explain how to add or extend shared layers without breaking the split between sh
 1. Create `.claude/skills/lv0-<name>/SKILL.md` or `.claude/skills/lv1-<name>/SKILL.md`.
 2. Point it at shared `.ai_shared/` assets first.
 
-### New Copilot agent
-1. Create `.github/agents/lv0-<name>.agent.md` or `.github/agents/lv1-<name>.agent.md`.
-2. Point it at shared `.ai_shared/` assets first.
-
 ## Wrapper Rules
 - A wrapper should explain how the tool enters the shared stack.
 - A wrapper should stay short and only describe tool-native behavior or tool-only exceptions.
@@ -52,7 +46,7 @@ Explain how to add or extend shared layers without breaking the split between sh
 2. Prefer composing existing `.ai_shared/` assets before adding new shared files.
 3. Keep `lv0` layers concern-oriented and `lv1` layers task-oriented.
 4. Do not put repo-specific facts into home-level shared wrappers or home-level `.ai_shared/`.
-5. If the change affects shared behavior, update Codex, Claude, and Copilot wrappers in the same pass.
+5. If the change affects shared behavior, update Codex and Claude wrappers in the same pass.
 6. Codex shared-skill changes must still be mirrored into `.codex/.agents-home/skills/`.
 7. Repo continuity lives in `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md`.
 
@@ -66,7 +60,7 @@ Explain how to add or extend shared layers without breaking the split between sh
 - New shared release task:
   tool wrapper + `lv0-instruction-core` + `lv1-release-note-writer`
 - New repo-specific backend feature wrapper:
-  tool wrapper + shared `lv0` or `lv1` layer + a thin repo-local override in `.codex/`, `.claude/`, or `.github/`
+  tool wrapper + shared `lv0` or `lv1` layer + a thin repo-local override in `.codex/` or `.claude/`
 
 ## Validation
 - Run `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1 -WhatIf`

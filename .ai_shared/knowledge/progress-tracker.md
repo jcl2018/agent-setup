@@ -12,6 +12,12 @@ Capture completed or meaningful in-progress work so future sessions can resume w
 ## Entries
 
 ### 2026-03-10
+- Goal: retire the managed `.github` wrapper surface so the shared skill stack only targets Codex and Claude.
+- Changed: updated the canonical shared skill definitions, authoring docs, audit workflow, repo docs, and sync scripts so the active managed tool set is now Codex plus Claude; regenerated the Codex and Claude skill wrappers from `.ai_shared/skills/`; and removed the repo's legacy `.github` wrapper files so stale third-tool references are not regenerated.
+- Validation: `powershell -ExecutionPolicy Bypass -File .\scripts\sync-shared-skills.ps1`, `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1 -WhatIf`, and a stale-reference scan for `copilot|copliot` across the repo excluding `.git` and the historical `progress-tracker.md` entries.
+- Resume cues: the repo now behaves as a two-tool setup; the remaining optional cleanup is to remove any old live-home `.github` wrapper files manually if you want the home folder to match the repo exactly, because the sync scripts do not delete unmanaged content.
+
+### 2026-03-10
 - Goal: fix the remaining `sync-shared-skills.ps1` regeneration failure that blocked reliable canonical wrapper generation.
 - Changed: updated `scripts/sync-shared-skills.ps1` so `Resolve-RequestedNames` now normalizes comma-separated input, de-duplicates names, and returns a real object array instead of wrapping a generic list object with `@($resolved)`, which had been causing the `Argument types do not match` failure. Re-ran the script successfully with the previously broken command forms for a single skill, a comma-separated skill list, an explicit PowerShell array call, and the default no-argument full regeneration path.
 - Validation: `powershell -ExecutionPolicy Bypass -File .\scripts\sync-shared-skills.ps1 -Name lv0-home-auditor`, `powershell -ExecutionPolicy Bypass -File .\scripts\sync-shared-skills.ps1 -Name lv0-home-auditor,lv0-instruction-core`, `powershell -ExecutionPolicy Bypass -Command "& '.\scripts\sync-shared-skills.ps1' -Name 'lv0-home-auditor','lv0-instruction-core'"`, `powershell -ExecutionPolicy Bypass -File .\scripts\sync-shared-skills.ps1`, and a follow-up `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1` plus hash checks confirming the regenerated live-home wrapper files match the repo copies.

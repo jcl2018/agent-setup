@@ -103,7 +103,7 @@ These are active home-level skills. Use them when the task matches, even if the 
 
 ## Maintenance Notes
 
-- Keep shared workflow, checklist, template, and skill names aligned with the Codex and Copilot mirrors unless the tool requires a different wrapper.
+- Keep shared workflow, checklist, template, and skill names aligned with the Codex mirror unless the tool requires a different wrapper.
 - Add durable shared guidance to `~/.ai_shared/knowledge/`.
 - Add repo-specific facts to the current repo's `.ai_shared/knowledge/`.
 - Bootstrap `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` during repo onboarding if they do not exist yet.

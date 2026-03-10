@@ -1,21 +1,19 @@
 # Home Agent Setup
 
-This repository is the git-backed mirror of a shared multi-tool AI setup built around one canonical shared layer and three tool-specific wrappers:
+This repository is the git-backed mirror of a shared multi-tool AI setup built around one canonical shared layer and two tool-specific wrappers:
 
 - `~/.ai_shared`
 - `~/.codex`
 - `~/.claude`
-- `~/.github`
 
-The goal is to keep reusable shared context in version control once, while still preserving native wrapper files for Codex, Claude, and Copilot.
+The goal is to keep reusable shared context in version control once, while still preserving native wrapper files for Codex and Claude.
 
 ## What This Repo Tracks
 
 - the shared cross-tool layer in `.ai_shared/`
 - the canonical shared skill definitions in `.ai_shared/skills/`
-- root instruction files such as `.codex/AGENTS.md`, `.claude/CLAUDE.md`, and `.github/copilot-instructions.md`
+- root instruction files such as `.codex/AGENTS.md` and `.claude/CLAUDE.md`
 - reusable Codex and Claude skills
-- reusable Copilot custom agents and path-specific instructions
 - helper scripts for syncing the managed files to and from your home folder
 
 ## What This Repo Does Not Track
@@ -32,15 +30,13 @@ The goal is to keep reusable shared context in version control once, while still
 |-- .ai_shared/
 |-- .codex/
 |-- .claude/
-|-- .github/
 `-- scripts/
 ```
 
 - `.ai_shared/` is the canonical shared layer for workflows, templates, checklists, knowledge, examples, and optional shared tasks.
-- `.ai_shared/skills/` holds the canonical shared skill definitions that feed the generated Codex, Claude, and Copilot wrappers.
+- `.ai_shared/skills/` holds the canonical shared skill definitions that feed the generated Codex and Claude wrappers.
 - `.codex/` holds Codex-native wrappers and config.
 - `.claude/` holds Claude-native wrappers and config.
-- `.github/` holds Copilot-native wrappers, agents, and path-specific instructions.
 - `scripts/` contains sync helpers that copy only the managed files.
 
 ## Home Vs Repo-Local
@@ -50,17 +46,17 @@ The goal is to keep reusable shared context in version control once, while still
 - Repo-local `.ai_shared/` is the canonical shared context for that repository across all tools.
 - `progress-tracker.md` and `future-plan.md` are always repo-local continuity docs under `.ai_shared/knowledge/`.
 - Repo-specific templates, checklists, workflows, knowledge notes, and other shared context should live in that repo's `.ai_shared/`.
-- Tool folders inside a repo such as `.codex/`, `.claude/`, and `.github/` should stay thin and only hold tool-specific wrappers, configs, or native integrations.
+- Tool folders inside a repo such as `.codex/` and `.claude/` should stay thin and only hold tool-specific wrappers, configs, or native integrations.
 - The sync scripts intentionally skip `progress-tracker.md` and `future-plan.md` when copying `.ai_shared/knowledge/` into the live home folder so stale home-level continuity files do not come back.
 
 ## Lookup Order
 
 When a tool needs context, use this order:
 
-1. Repo-local tool override such as `.codex/`, `.claude/`, or `.github/` when the behavior is truly tool-specific.
+1. Repo-local tool override such as `.codex/` or `.claude/` when the behavior is truly tool-specific.
 2. Repo-local `.ai_shared/`.
 3. Home `~/.ai_shared/`.
-4. Home tool wrapper such as `~/.codex/`, `~/.claude/`, or `~/.github/`.
+4. Home tool wrapper such as `~/.codex/` or `~/.claude/`.
 
 ## Layered Agent Model
 
@@ -111,7 +107,7 @@ Use `lv0-skill-onboarding` when you want to create, rename, extend, or standardi
    - `lv1` for reusable task wrappers such as feature work, defect fixing, or review
    - `lv2` for thin repo-specific wrappers built on top of the shared stack
 3. Reuse the nearest existing skill or agent as the template before creating new files.
-4. When the capability is shared, update Codex, Claude, and Copilot together, and mirror Codex skill changes into `.codex/.agents-home/skills/`.
+4. When the capability is shared, update Codex and Claude together, and mirror Codex skill changes into `.codex/.agents-home/skills/`.
 5. Validate with `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1 -WhatIf`.
 
 ## Sync Commands
@@ -139,11 +135,9 @@ Sync only one tool wrapper and the shared layer it depends on:
 ```powershell
 pwsh ./scripts/sync-to-home.ps1 -Tool codex
 pwsh ./scripts/sync-from-home.ps1 -Tool claude
-pwsh ./scripts/sync-to-home.ps1 -Tool copilot
 ```
 
 ## Notes
 
-- Copilot path-specific instructions live in `.github/instructions/*.instructions.md`.
-- Copilot task-specific behavior lives in `.github/agents/*.agent.md`.
+- This repo no longer manages the old `.github` wrapper set; the active tool surfaces are Codex and Claude.
 - The sync scripts are intentionally non-destructive: they copy managed files, but they do not delete extra local runtime data in your home folder.
