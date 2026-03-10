@@ -1,7 +1,7 @@
 interface:
   display_name: "Lv0 Doc Writer"
-  short_description: "Write technical docs from verified repo facts"
-  default_prompt: "Use $lv0-doc-writer to draft or update technical documentation with verified commands, file paths, and concise structure."
+  short_description: "Write accurate docs from verified repo facts"
+  default_prompt: "Use $lv0-doc-writer to inspect the repo, verify commands and behavior claims, write or refine concise documentation, and summarize any remaining gaps."
 
 policy:
   allow_implicit_invocation: true

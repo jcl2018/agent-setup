@@ -15,4 +15,10 @@ if ([string]::IsNullOrWhiteSpace($HomeRoot)) {
 
 $scriptPath = Join-Path $PSScriptRoot "home-mirror.ps1"
 & $scriptPath -Direction "from-home" -Tool $Tool -RepoRoot $RepoRoot -HomeRoot $HomeRoot -WhatIf:$WhatIfPreference
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+}
+
+$skillSyncPath = Join-Path $PSScriptRoot "sync-shared-skills.ps1"
+& $skillSyncPath -RepoRoot $RepoRoot -WhatIf:$WhatIfPreference
 exit $LASTEXITCODE

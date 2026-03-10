@@ -1,15 +1,15 @@
 ---
-applyTo: ".codex/**,.claude/**,.github/**"
+applyTo: ".ai_shared/**,.codex/**,.claude/**,.github/**"
 ---
 
-This repository mirrors home-level AI tool configuration.
+This repository mirrors a shared multi-tool AI setup.
 
-- Keep shared workflow, checklist, template, and knowledge filenames aligned across tool roots when possible.
-- Keep the layered stack aligned across tools: `lv0-instruction-core`, then any needed `lv0` onboarding or specialist helper, then the `lv1` task wrapper and any repo-specific `lv2` wrapper.
-- Prefer outcome-based user requests; the agent should handle the internal workflow, knowledge, template, and checklist choices.
-- Keep `knowledge/progress-tracker.md` and `knowledge/future-plan.md` updated in each tool root; completed context belongs in the progress tracker and unfinished work belongs in the future plan.
-- Keep repo-specific knowledge, templates, checklists, workflows, instructions, and thin wrappers in the current repo's tool root; use the home mirror only for reusable cross-repo defaults.
-- Preserve the distinction between reusable configuration and local runtime state.
+- Treat `.ai_shared/` as the canonical shared context layer for all tools.
+- Keep reusable workflows, templates, checklists, knowledge notes, examples, and optional shared tasks in `.ai_shared/`.
+- Keep `progress-tracker.md` and `future-plan.md` only in each repo's `.ai_shared/knowledge/`.
+- Keep `.codex/`, `.claude/`, and `.github/` thin: use them for tool-native wrappers, configs, skills, agents, and auto-attached instructions.
+- Prefer repo-local `.ai_shared/` over `~/.ai_shared/` when a repo defines its own shared context.
+- Preserve the distinction between reusable shared context and tool-specific behavior.
 - Avoid machine-specific absolute paths inside docs unless the file is explicitly about the current machine.
 - Prefer small, reviewable edits over broad rewrites.
-- When a change belongs in more than one tool root, update the related files in the same pass or leave a clear note.
+- When a change belongs in more than one tool wrapper, update the related files in the same pass or leave a clear note.

@@ -1,7 +1,7 @@
 interface:
   display_name: "Lv0 Instruction Core"
-  short_description: "Choose the right Codex workflow, template, checklist, and skill stack"
-  default_prompt: "Use $lv0-instruction-core to route the task through the shared Codex layers, pick the smallest safe skill stack, and summarize what shared assets should be used."
+  short_description: "Route work through the shared stack"
+  default_prompt: "Use $lv0-instruction-core to choose the right shared stack, route context through .ai_shared, keep wrapper-specific behavior thin, and summarize the validation path."
 
 policy:
   allow_implicit_invocation: true

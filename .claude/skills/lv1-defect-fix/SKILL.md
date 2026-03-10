@@ -1,23 +1,24 @@
 ---
 name: lv1-defect-fix
-description: Diagnose and fix defects using the shared Claude home workflows, templates, checklists, and knowledge notes. Use when Claude needs to debug unexpected behavior, investigate a regression, repair a broken path, or ship a scoped bug fix with clear reasoning and verification.
+description: Diagnose and fix defects using the shared home-root workflows, templates, checklists, and knowledge notes. Use when debugging unexpected behavior, investigating a regression, repairing a broken path, or shipping a scoped bug fix with clear reasoning and verification.
 ---
+<!-- Generated from .ai_shared/skills/lv1-defect-fix/shared.md. Edit the shared source and run scripts/sync-shared-skills.ps1. -->
 
 # Lv1 Defect Fix
 
 ## Overview
 
-Use the shared home-root Claude files to reason about defects, prefer root-cause fixes, and document remaining uncertainty clearly.
+Use the shared home-root files to reason about defects, prefer root-cause fixes, and document remaining uncertainty clearly.
 
 ## Workflow
 
 1. Read `~/.claude/skills/lv0-instruction-core/SKILL.md`.
-2. Read `~/.claude/workflows/workflow-defect.md`.
-3. Read the most relevant repo-local context from `.claude/knowledge/`, especially `architecture.md`, `repo-map.md`, and `test-commands.md`. Use `~/.claude/knowledge/` only for shared cross-repo guidance when the repo has no local equivalent.
-4. Use `.claude/templates/defect-report-template.md` when the repo defines one and the issue needs a written diagnosis or handoff note; otherwise use `~/.claude/templates/defect-report-template.md`.
+2. Read `~/.ai_shared/workflows/workflow-defect.md`.
+3. Read the most relevant repo-local context from `.ai_shared/knowledge/`, especially `architecture.md`, `repo-map.md`, and `test-commands.md`. Use `~/.ai_shared/knowledge/` for shared cross-repo guidance when the repo has no local override.
+4. Use `.ai_shared/templates/defect-report-template.md` when the repo defines one and the issue needs a written diagnosis or handoff note; otherwise use `~/.ai_shared/templates/defect-report-template.md`.
 5. Reproduce the issue when possible, or explain why reproduction is not available.
 6. Apply the smallest reliable fix that addresses the likely cause.
-7. Validate against repo-local `.claude/checklists/bugfix-verification.md` and `.claude/checklists/post-edit-checklist.md` when the repo defines them; otherwise use the shared `~/.claude/checklists/bugfix-verification.md` and `~/.claude/checklists/post-edit-checklist.md`.
+7. Validate against repo-local `.ai_shared/checklists/bugfix-verification.md` and `.ai_shared/checklists/post-edit-checklist.md` when the repo defines them; otherwise use the shared `~/.ai_shared/checklists/bugfix-verification.md` and `~/.ai_shared/checklists/post-edit-checklist.md`.
 8. Summarize the issue, likely cause, fix, validation, and remaining risk.
 
 ## Output Shape

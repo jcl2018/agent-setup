@@ -1,0 +1,74 @@
+{
+  "skills": [
+    {
+      "name": "lv0-code-polisher",
+      "displayName": "Lv0 Code Polisher",
+      "description": "Improve code quality, readability, structure, and maintainability without changing intended behavior unless the task explicitly asks for it.",
+      "codexShortDescription": "Clean up code without changing intended behavior",
+      "codexDefaultPrompt": "Use $lv0-code-polisher to improve code clarity, structure, and maintainability while preserving intended behavior and validating the result."
+    },
+    {
+      "name": "lv0-doc-writer",
+      "displayName": "Lv0 Doc Writer",
+      "description": "Write or refine technical documentation, usage guides, runbooks, and architecture notes using verified repo facts.",
+      "codexShortDescription": "Write accurate docs from verified repo facts",
+      "codexDefaultPrompt": "Use $lv0-doc-writer to inspect the repo, verify commands and behavior claims, write or refine concise documentation, and summarize any remaining gaps."
+    },
+    {
+      "name": "lv0-instruction-core",
+      "displayName": "Lv0 Instruction Core",
+      "description": "Shared routing layer for the home-root AI setup. Use when choosing folders, composing other shared layers, or creating new repo-specific wrappers.",
+      "codexShortDescription": "Route work through the shared stack",
+      "codexDefaultPrompt": "Use $lv0-instruction-core to choose the right shared stack, route context through .ai_shared, keep wrapper-specific behavior thin, and summarize the validation path."
+    },
+    {
+      "name": "lv0-repo-onboarding",
+      "displayName": "Lv0 Repo Onboarding",
+      "description": "Build working context for an unfamiliar repository using the shared home-root workflows, templates, checklists, and knowledge notes.",
+      "codexShortDescription": "Map an unfamiliar repo and capture reusable context",
+      "codexDefaultPrompt": "Use $lv0-repo-onboarding to inspect the repo layout, identify key files and commands, refresh the shared tracker notes, and summarize the next files to inspect."
+    },
+    {
+      "name": "lv0-skill-onboarding",
+      "displayName": "Lv0 Skill Onboarding",
+      "description": "Guide the creation or extension of shared lv0, lv1, and repo-specific lv2 skills and agents using the shared home-root authoring system.",
+      "codexShortDescription": "Author or extend shared skills and agents safely",
+      "codexDefaultPrompt": "Use $lv0-skill-onboarding to choose the right layer, update canonical shared skill definitions in .ai_shared when needed, regenerate the tool wrappers, and summarize the validation."
+    },
+    {
+      "name": "lv1-code-review",
+      "displayName": "Lv1 Code Review",
+      "description": "Review changes using the shared home-root workflows, templates, checklists, and knowledge notes. Use when inspecting a diff or file set for correctness issues, regressions, risky assumptions, missing tests, or overall merge readiness.",
+      "codexShortDescription": "Review changes for bugs, regressions, and test gaps",
+      "codexDefaultPrompt": "Use $lv1-code-review to inspect the diff or file set, surface the highest-risk findings first, call out missing validation, and summarize residual risk."
+    },
+    {
+      "name": "lv1-defect-fix",
+      "displayName": "Lv1 Defect Fix",
+      "description": "Diagnose and fix defects using the shared home-root workflows, templates, checklists, and knowledge notes. Use when debugging unexpected behavior, investigating a regression, repairing a broken path, or shipping a scoped bug fix with clear reasoning and verification.",
+      "codexShortDescription": "Diagnose and fix a scoped bug",
+      "codexDefaultPrompt": "Use $lv1-defect-fix to inspect the bug, find the likely root cause, apply the smallest reliable fix, validate it, and summarize any remaining risk."
+    },
+    {
+      "name": "lv1-feature-dev",
+      "displayName": "Lv1 Feature Dev",
+      "description": "Implement scoped feature work using the shared home-root workflows, templates, checklists, and knowledge notes. Use when adding behavior, expanding a capability, wiring a new integration, or delivering a user-facing enhancement with controlled scope and clear validation.",
+      "codexShortDescription": "Implement scoped feature work and capture PRD details when needed",
+      "codexDefaultPrompt": "Use $lv1-feature-dev to inspect context, capture requirements in a PRD when APIs or use cases need to be recorded, plan the smallest safe feature change, implement it, validate it, and summarize the result."
+    },
+    {
+      "name": "lv1-figma-implement-design",
+      "displayName": "Lv1 Figma Implement Design",
+      "description": "Implement Figma-driven UI work using the shared feature workflow and design-context steps. Use when turning a Figma frame, component, or node into repo-appropriate code with strong visual fidelity across multiple repos.",
+      "codexShortDescription": "Implement Figma-driven UI work with fidelity checks",
+      "codexDefaultPrompt": "Use $lv1-figma-implement-design to inspect the target UI, gather reliable Figma context, implement the smallest faithful change, validate fidelity, and summarize any remaining visual gap."
+    },
+    {
+      "name": "lv1-github-repo-readiness",
+      "displayName": "Lv1 GitHub Repo Readiness",
+      "description": "Audit or improve a repository for private or public GitHub use. Use when preparing a repo for internal sharing, public release, contributor onboarding, or publication cleanup across multiple repos.",
+      "codexShortDescription": "Audit or improve repos for private or public GitHub use",
+      "codexDefaultPrompt": "Use $lv1-github-repo-readiness to audit the repo for private or public GitHub readiness, surface blockers first, make safe low-risk improvements when appropriate, and summarize the next moves."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lv1 Figma Implement Design"
+  short_description: "Implement Figma-driven UI work with fidelity checks"
+  default_prompt: "Use $lv1-figma-implement-design to inspect the target UI, gather reliable Figma context, implement the smallest faithful change, validate fidelity, and summarize any remaining visual gap."
+
+policy:
+  allow_implicit_invocation: true

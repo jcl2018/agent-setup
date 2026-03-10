@@ -22,6 +22,20 @@ if ([string]::IsNullOrWhiteSpace($HomeRoot)) {
     $HomeRoot = $HOME
 }
 
+$sharedSpec = @{
+    RepoDir = ".ai_shared"
+    HomeDir = ".ai_shared"
+    Items   = @(
+        "skills",
+        "workflows",
+        "templates",
+        "checklists",
+        "knowledge",
+        "examples",
+        "tasks"
+    )
+}
+
 $toolSpecs = @{
     codex = @{
         RepoDir = ".codex"
@@ -29,14 +43,8 @@ $toolSpecs = @{
         Items   = @(
             "AGENTS.md",
             "config.toml",
-            "workflows",
-            "templates",
-            "checklists",
-            "knowledge",
             "skills",
-            ".agents-home",
-            "examples",
-            "tasks"
+            ".agents-home"
         )
     }
     claude = @{
@@ -45,13 +53,7 @@ $toolSpecs = @{
         Items   = @(
             "CLAUDE.md",
             "settings.json",
-            "workflows",
-            "templates",
-            "checklists",
-            "knowledge",
-            "skills",
-            "examples",
-            "tasks"
+            "skills"
         )
     }
     copilot = @{
@@ -60,13 +62,7 @@ $toolSpecs = @{
         Items   = @(
             "copilot-instructions.md",
             "instructions",
-            "agents",
-            "workflows",
-            "templates",
-            "checklists",
-            "knowledge",
-            "examples",
-            "tasks"
+            "agents"
         )
     }
 }
@@ -89,6 +85,14 @@ function Get-ExcludedChildNames {
 
     if ($RelativePath -eq "knowledge") {
         return $excludedKnowledgeFiles
+    }
+
+    if ($RelativePath -eq "skills") {
+        return @(".system")
+    }
+
+    if ($RelativePath -eq ".agents-home") {
+        return @("_removed-skills")
     }
 
     return @()
@@ -169,13 +173,14 @@ function Copy-ManagedItem {
     return $true
 }
 
-$requestedTools = Resolve-RequestedTools -Requested $Tool
-$copied = 0
+function Copy-SpecItems {
+    param(
+        [hashtable]$Spec,
+        [int]$CopiedCount
+    )
 
-foreach ($toolName in $requestedTools) {
-    $spec = $toolSpecs[$toolName]
-    $repoToolRoot = Join-Path $RepoRoot $spec.RepoDir
-    $homeToolRoot = Join-Path $HomeRoot $spec.HomeDir
+    $repoToolRoot = Join-Path $RepoRoot $Spec.RepoDir
+    $homeToolRoot = Join-Path $HomeRoot $Spec.HomeDir
 
     if ($Direction -eq "to-home") {
         $sourceRoot = $repoToolRoot
@@ -185,11 +190,22 @@ foreach ($toolName in $requestedTools) {
         $destinationRoot = $repoToolRoot
     }
 
-    foreach ($item in $spec.Items) {
+    foreach ($item in $Spec.Items) {
         if (Copy-ManagedItem -SourceRoot $sourceRoot -DestinationRoot $destinationRoot -RelativePath $item) {
-            $copied += 1
+            $CopiedCount += 1
         }
     }
+
+    return $CopiedCount
+}
+
+$requestedTools = Resolve-RequestedTools -Requested $Tool
+$copied = 0
+
+$copied = Copy-SpecItems -Spec $sharedSpec -CopiedCount $copied
+
+foreach ($toolName in $requestedTools) {
+    $copied = Copy-SpecItems -Spec $toolSpecs[$toolName] -CopiedCount $copied
 }
 
 if ($Direction -eq "to-home") {
@@ -206,4 +222,4 @@ foreach ($item in $rootItems) {
     }
 }
 
-Write-Host ("Completed {0} sync for {1}. Managed items copied: {2}" -f $Direction, ($requestedTools -join ", "), $copied)
+Write-Host ("Completed {0} sync for shared layer plus {1}. Managed items copied: {2}" -f $Direction, ($requestedTools -join ", "), $copied)
