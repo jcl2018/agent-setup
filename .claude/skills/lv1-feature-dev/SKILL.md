@@ -13,14 +13,15 @@ Use the shared home-root files to keep feature work small, reviewable, easy to v
 ## Workflow
 
 1. Read `~/.claude/skills/lv0-instruction-core/SKILL.md`.
-2. Read `~/.ai_shared/workflows/workflow-feature.md`.
-3. Read the most relevant repo-local context from `.ai_shared/knowledge/`, especially `architecture.md`, `repo-map.md`, and `test-commands.md`. Use `~/.ai_shared/knowledge/` for shared cross-repo guidance when the repo has no local override.
-4. When the task includes product-shaping details such as APIs, requirements, use cases, acceptance criteria, or open questions, create or update a PRD in the repo's existing docs area. Prefer the established repo-local PRD path and `.ai_shared/templates/` template when they exist; otherwise use `docs/prd/` and `~/.ai_shared/templates/prd-template.md`.
-5. Pull in `~/.claude/skills/lv0-doc-writer/SKILL.md` when the PRD becomes a meaningful deliverable or needs heavier documentation support than the normal feature flow.
-6. Use `.ai_shared/templates/plan-template.md` when the repo defines one and the task is large enough to benefit from a short implementation plan; otherwise use `~/.ai_shared/templates/plan-template.md`.
-7. Make the smallest safe change that satisfies the request, and keep the PRD aligned with the implemented scope, important tradeoffs, and deferred follow-ups.
-8. Validate against repo-local `.ai_shared/checklists/feature-validation.md` and `.ai_shared/checklists/post-edit-checklist.md` when the repo defines them; otherwise use the shared `~/.ai_shared/checklists/feature-validation.md` and `~/.ai_shared/checklists/post-edit-checklist.md`.
-9. Summarize the result with PRD status, validation status, known limitations, and next steps.
+2. Pull in `~/.claude/skills/lv0-code-polisher/SKILL.md` because feature implementation changes code.
+3. Read `~/.ai_shared/workflows/workflow-feature.md`.
+4. Read the most relevant repo-local context from `.ai_shared/knowledge/`, especially `architecture.md`, `repo-map.md`, and `test-commands.md`. Use `~/.ai_shared/knowledge/` for shared cross-repo guidance when the repo has no local override.
+5. When the task includes product-shaping details such as APIs, requirements, use cases, acceptance criteria, or open questions, create or update a PRD in the repo's existing docs area. Prefer the established repo-local PRD path and `.ai_shared/templates/` template when they exist; otherwise use `docs/prd/` and `~/.ai_shared/templates/prd-template.md`.
+6. Pull in `~/.claude/skills/lv0-doc-writer/SKILL.md` when the PRD becomes a meaningful deliverable or needs heavier documentation support than the normal feature flow.
+7. Use `.ai_shared/templates/plan-template.md` when the repo defines one and the task is large enough to benefit from a short implementation plan; otherwise use `~/.ai_shared/templates/plan-template.md`.
+8. Make the smallest safe change that satisfies the request, and keep the PRD aligned with the implemented scope, important tradeoffs, and deferred follow-ups.
+9. Validate against repo-local `.ai_shared/checklists/feature-validation.md` and `.ai_shared/checklists/post-edit-checklist.md` when the repo defines them; otherwise use the shared `~/.ai_shared/checklists/feature-validation.md` and `~/.ai_shared/checklists/post-edit-checklist.md`.
+10. Summarize the result with PRD status, validation status, known limitations, and next steps.
 
 ## Output Shape
 

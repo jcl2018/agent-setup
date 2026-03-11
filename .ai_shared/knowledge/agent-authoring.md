@@ -49,18 +49,19 @@ Explain how to add or extend shared layers without breaking the split between sh
 5. If the change affects shared behavior, update Codex and Claude wrappers in the same pass.
 6. Codex shared-skill changes must still be mirrored into `.codex/.agents-home/skills/`.
 7. Repo continuity lives in `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md`.
+8. Global `lv0-home-auditor` continuity lives in `~/.ai_shared/knowledge/progress-tracker.md` and `~/.ai_shared/knowledge/future-plan.md`.
 
 ## Example Stacks
 - Weekly home-folder alignment layer:
-  tool wrapper + `lv0-instruction-core` + `lv0-home-auditor`
+  tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv0-home-auditor`
 - New reusable test-hardening layer:
-  tool wrapper + `lv0-instruction-core` + `lv0-test-hardener`
+  tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv0-test-hardener`
 - Extending this mirror repo:
-  tool wrapper + `lv0-instruction-core` + `lv0-repo-onboarding` + `lv0-skill-onboarding`
+  tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv0-repo-onboarding` + `lv0-skill-onboarding`
 - New shared release task:
-  tool wrapper + `lv0-instruction-core` + `lv1-release-note-writer`
+  tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv1-release-note-writer`
 - New repo-specific backend feature wrapper:
-  tool wrapper + shared `lv0` or `lv1` layer + a thin repo-local override in `.codex/` or `.claude/`
+  tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + shared `lv0` or `lv1` layer + a thin repo-local override in `.codex/` or `.claude/`
 
 ## Validation
 - Run `powershell -ExecutionPolicy Bypass -File .\scripts\sync-to-home.ps1 -WhatIf`

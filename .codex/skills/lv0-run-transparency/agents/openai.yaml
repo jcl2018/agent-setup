@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lv0 Run Transparency"
+  short_description: "Show the chosen skill stack and shared context at run start"
+  default_prompt: "Use $lv0-run-transparency to announce the selected skills, the repo-local and home-level .ai_shared sources you consulted, and why they fit the task before deeper work continues."
+
+policy:
+  allow_implicit_invocation: true

@@ -12,6 +12,7 @@
 ## Workflows and Skills
 - Keep shared workflow and skill names aligned across tools:
 - `lv0-instruction-core`
+- `lv0-run-transparency`
 - `lv0-home-auditor`
 - `lv0-repo-onboarding`
 - `lv0-skill-onboarding`

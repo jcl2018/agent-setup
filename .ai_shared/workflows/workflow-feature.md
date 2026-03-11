@@ -21,7 +21,7 @@ Use this workflow when the task asks for:
 2. Inspect the relevant files, entry points, existing docs locations, and validation commands.
 3. If the task introduces or changes product-shaping details such as requirements, APIs, use cases, acceptance criteria, or open questions, create or update a PRD in the repo's existing docs area. Prefer the established PRD path when one exists; otherwise use `docs/prd/<feature-name>.md` and the shared PRD template.
 4. Propose the smallest safe approach that satisfies the request and the documented product intent.
-5. Implement the change with scope discipline while keeping the PRD aligned with important decisions, tradeoffs, and deferred items.
+5. Implement the change with scope discipline and `lv0-code-polisher` craftsmanship expectations while keeping the PRD aligned with important decisions, tradeoffs, and deferred items.
 6. Run checks or describe what could not be run.
 7. Review for regressions, edge cases, and follow-on impacts.
 8. Update `.ai_shared/knowledge/progress-tracker.md` with what changed, PRD status, validation, and resume context.

@@ -21,7 +21,7 @@ Use this workflow when the task asks for:
 2. Inspect the affected code paths, logs, tests, and recent context.
 3. Reproduce the issue or explain why reproduction is not currently possible.
 4. Identify the likely cause and choose the smallest reliable fix.
-5. Implement the fix and add or update validation where appropriate.
+5. Implement the fix with `lv0-code-polisher` cleanup discipline and add or update validation where appropriate.
 6. Run checks, targeted tests, or manual verification.
 7. Review for adjacent regressions.
 8. Update `.ai_shared/knowledge/progress-tracker.md` with the issue, fix, validation, and resume cues.
