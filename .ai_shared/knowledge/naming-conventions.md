@@ -4,6 +4,7 @@
 - Prefer lowercase kebab-case for general markdown and config docs.
 - Follow existing repo conventions when working inside a project.
 - Reserve `progress-tracker.md` and `future-plan.md` for the standard repo continuity docs in each repo's `.ai_shared/knowledge/` folder.
+- Use `home-audit-rules.md` for repo-specific weekly audit expectations when a repo needs extra audit coverage.
 
 ## Code Symbols
 - Match the naming style already used in the target language and codebase.
@@ -24,9 +25,9 @@
 - `lv1-github-repo-readiness`
 
 ## Layer Prefixes
-- Use `lv0-` for shared base and specialist skills.
-- Use `lv1-` for reusable task wrappers.
-- Reserve `lv2-` for repo-specific wrappers built on top of the shared stack.
+- Use `lv0-` for shared base, logistics, standards, audit, and automation skills.
+- Use `lv1-` for reusable shared workflows.
+- Reserve repo-prefixed `lv2-<repo>-*` names for repo-specific wrappers built on top of the shared stack.
 
 ## Repo-Specific Additions
 - Record exceptions or language-specific rules here.

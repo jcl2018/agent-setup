@@ -18,7 +18,11 @@ Use the home-root Claude wrapper in `~/.claude` together with the shared context
 ## Layering Rule
 
 - Start with `lv0-instruction-core`.
+- Treat `lv0-*` as the basic logistics, standards, audit, and automation layer.
+- Treat `lv1-*` as reusable shared workflows that can apply across repos.
+- Treat repo-specific `lv2-<repo>-*` wrappers as thin repo overrides that make the repo scope obvious from the name.
 - On the first repo request during a new calendar week, run `lv0-home-auditor` if `~/.ai_shared/knowledge/progress-tracker.md` does not already show a current-week home audit.
+- On the first conversation in a specific repo during a new calendar week, also run `lv0-home-auditor` if `.ai_shared/knowledge/progress-tracker.md` does not already show a current-week repo-specific audit for that repo.
 - Add `lv0-run-transparency` at the start of every run so the user sees the selected skills, the repo-local `.ai_shared/` context, the home-level `~/.ai_shared/` defaults, and why that stack fits the task.
 - For any task that changes code, add `lv0-code-polisher`.
 - Add any other needed `lv0` helper such as `lv0-home-auditor`, `lv0-repo-onboarding`, `lv0-skill-onboarding`, or `lv0-doc-writer`.
@@ -39,15 +43,16 @@ These are active home-level skills. Use them when the task matches, even if the 
 
 - `lv0-instruction-core`: shared routing skill that tells other skills which folders and layers to use
 - `lv0-run-transparency`: explain the selected skill stack and shared context at the start of each run
-- `lv0-home-auditor`: weekly home-folder auditor for local config alignment, wrapper sync, access checks, and cleanup candidates
+- `lv0-home-auditor`: lv0 logistics/audit layer for config alignment, generic repo hygiene, wrapper sync, access checks, and cleanup candidates
 - `lv0-repo-onboarding`: map an unfamiliar repository and build reusable context before deeper work
-- `lv0-skill-onboarding`: guide creation and extension of shared lv0, lv1, and repo-specific lv2 skills
+- `lv0-skill-onboarding`: guide creation and extension of shared lv0 logistics/automation skills, shared lv1 workflows, and repo-prefixed lv2 skills
 - `lv0-code-polisher`: improve code quality and maintainability without changing intended behavior
 - `lv0-doc-writer`: write or refine technical documentation from verified repo facts
 - `lv1-feature-dev`: implement scoped feature work and capture PRDs when requirements need to be recorded
+- `lv1-figma-implement-design`: implement Figma-driven UI work with repo conventions and fidelity checks
 - `lv1-defect-fix`: diagnose and fix bugs or regressions
 - `lv1-code-review`: review diffs for correctness, regressions, and test gaps
-- `lv1-github-repo-readiness`: audit or improve a repo for private or public GitHub use, publication prep, and contributor experience across repos
+- `lv1-github-repo-readiness`: handle GitHub-facing sharing, publication prep, and contributor-surface hardening after the local repo audit baseline
 
 ## Task Routing
 
@@ -96,9 +101,11 @@ These are active home-level skills. Use them when the task matches, even if the 
 - Prefer the smallest safe change that satisfies the task.
 - Inspect local context before deciding on an implementation.
 - Before deeper work, tell the user which skills are in play, which repo-local `.ai_shared/` files and home-level `~/.ai_shared/` defaults were consulted, and why those sources fit the task.
-- On the first repo request handled during a calendar week, check `~/.ai_shared/knowledge/progress-tracker.md`; if no current-week `lv0-home-auditor` entry exists there, run the weekly home-folder audit and log the result before deeper task work.
+- On the first repo request handled during a calendar week, check `~/.ai_shared/knowledge/progress-tracker.md`; if no current-week `lv0-home-auditor` entry exists there, run the weekly home-folder audit before deeper task work.
+- On the first conversation in a specific repo during a calendar week, also check `.ai_shared/knowledge/progress-tracker.md`; if no current-week repo-specific `lv0-home-auditor` entry exists there, run the repo-specific weekly audit procedure before deeper task work.
 - Treat workflows, templates, checklists, and knowledge folders as agent-owned implementation detail; users should be able to request outcomes directly.
 - Keep repo-specific context, templates, checklists, workflows, and continuity docs in the current repo's `.ai_shared/`.
+- Put repo-specific audit rules in the current repo's `.ai_shared/workflows/workflow-home-audit.md`, `.ai_shared/checklists/home-audit-checklist.md`, and `.ai_shared/knowledge/home-audit-rules.md` when the repo needs extra coverage.
 - Keep canonical shared skill definitions in `.ai_shared/skills/` and sync the generated wrappers from there.
 - Keep only reusable cross-repo assets in `~/.ai_shared/`.
 - Keep tool-specific wrappers, configs, and native integrations in `.claude/` or `~/.claude/`.

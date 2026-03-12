@@ -24,6 +24,7 @@ Track the directories and files that are most useful when extending this home-ag
 
 ## Important Config Files
 - `.ai_shared/knowledge/agent-stack.md`
+- `.ai_shared/knowledge/home-audit-rules.md`
 - `.codex/config.toml`
 - `.claude/settings.json`
 - `AGENTS.md`
@@ -33,4 +34,4 @@ Track the directories and files that are most useful when extending this home-ag
 - Treat actual home runtime state outside the mirrored directories as unmanaged and out of scope for repo edits.
 
 ## Quick Start for Future Sessions
-- Inspect `README.md`, `AGENTS.md`, `.ai_shared/knowledge/progress-tracker.md`, `.ai_shared/knowledge/future-plan.md`, `.ai_shared/knowledge/agent-stack.md`, and `scripts/home-mirror.ps1` first.
+- Inspect `README.md`, `AGENTS.md`, `.ai_shared/knowledge/progress-tracker.md`, `.ai_shared/knowledge/future-plan.md`, `.ai_shared/knowledge/agent-stack.md`, `.ai_shared/knowledge/home-audit-rules.md`, and `scripts/home-mirror.ps1` first.

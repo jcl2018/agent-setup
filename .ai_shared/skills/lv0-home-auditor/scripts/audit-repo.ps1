@@ -1,7 +1,5 @@
 param(
-    [string]$RepoPath = ".",
-    [ValidateSet("private", "public", "either")]
-    [string]$Visibility = "either"
+    [string]$RepoPath = "."
 )
 
 Set-StrictMode -Version Latest
@@ -16,7 +14,7 @@ if ($LASTEXITCODE -ne 0 -or $gitCheck.Trim() -ne "true") {
 
 $trackedFiles = @(git -C $repoRoot ls-files)
 
-$releaseBlockers = New-Object System.Collections.Generic.List[string]
+$repoBlockers = New-Object System.Collections.Generic.List[string]
 $important = New-Object System.Collections.Generic.List[string]
 $niceToHave = New-Object System.Collections.Generic.List[string]
 $signals = New-Object System.Collections.Generic.List[string]
@@ -28,7 +26,7 @@ function Add-Finding {
     )
 
     switch ($Severity) {
-        "blocker" { $script:releaseBlockers.Add($Message) }
+        "blocker" { $script:repoBlockers.Add($Message) }
         "important" { $script:important.Add($Message) }
         "nice" { $script:niceToHave.Add($Message) }
         "signal" { $script:signals.Add($Message) }
@@ -41,6 +39,37 @@ function Test-AnyPath {
 
     foreach ($candidate in $Candidates) {
         if (Test-Path -LiteralPath (Join-Path $repoRoot $candidate)) {
+            return $true
+        }
+    }
+
+    return $false
+}
+
+function Test-DocumentedValidationPath {
+    param([string[]]$Candidates)
+
+    foreach ($candidate in $Candidates) {
+        $fullPath = Join-Path $repoRoot $candidate
+        if (-not (Test-Path -LiteralPath $fullPath)) {
+            continue
+        }
+
+        $content = Get-Content -Raw -LiteralPath $fullPath -ErrorAction SilentlyContinue
+        if ([string]::IsNullOrWhiteSpace($content)) {
+            continue
+        }
+
+        $hasCommandExample = ($content -match '(?s)```.+?```') -or ($content -match '(?m)^-\s+`[^`]+`')
+        if (-not $hasCommandExample) {
+            continue
+        }
+
+        if ($candidate -like "*.ai_shared/knowledge/test-commands.md" -or $candidate -eq ".ai_shared/knowledge/test-commands.md") {
+            return $true
+        }
+
+        if ($content -match '(?im)\b(test|validation|verify|verification|check)\b') {
             return $true
         }
     }
@@ -76,111 +105,33 @@ function Get-RelativePath {
 }
 
 $readmePresent = Test-AnyPath @("README.md", "README.rst", "README.txt")
-$licensePresent = Test-AnyPath @("LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING")
-$contributingPresent = Test-AnyPath @("CONTRIBUTING.md", ".github/CONTRIBUTING.md")
-$securityPresent = Test-AnyPath @("SECURITY.md", ".github/SECURITY.md")
-$conductPresent = Test-AnyPath @("CODE_OF_CONDUCT.md", ".github/CODE_OF_CONDUCT.md")
-$ciPresent = Test-Path -LiteralPath (Join-Path $repoRoot ".github/workflows")
-$issueTemplatesPresent = Test-Path -LiteralPath (Join-Path $repoRoot ".github/ISSUE_TEMPLATE")
-$prTemplatePresent = Test-AnyPath @(".github/pull_request_template.md", "pull_request_template.md")
 $testsPresent = (Test-Path -LiteralPath (Join-Path $repoRoot "tests")) -or (@(Get-ChildItem -LiteralPath $repoRoot -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -match "^(test|spec)" }).Count -gt 0)
+$documentedValidationPresent = Test-DocumentedValidationPath @(".ai_shared/knowledge/test-commands.md", "README.md", "README.rst", "README.txt")
 $docsPresent = (Test-Path -LiteralPath (Join-Path $repoRoot "docs")) -or (Test-Path -LiteralPath (Join-Path $repoRoot "examples"))
 $gitignorePresent = Test-AnyPath @(".gitignore")
 
 if (-not $readmePresent) {
-    Add-Finding blocker "Missing README: explain the problem, install steps, and first successful run."
+    Add-Finding blocker "Missing README: explain the problem, local setup, and a first successful run."
 } else {
     Add-Finding signal "README is present."
 }
 
-switch ($Visibility) {
-    "public" {
-        if (-not $licensePresent) {
-            Add-Finding blocker "Missing license: add a real LICENSE file before public release so reuse terms are explicit."
-        } else {
-            Add-Finding signal "License file is present."
-        }
-    }
-    "either" {
-        if (-not $licensePresent) {
-            Add-Finding important "Missing license: acceptable for a private repo today, but required before any public release."
-        } else {
-            Add-Finding signal "License file is present."
-        }
-    }
-    "private" {
-        if (-not $licensePresent) {
-            Add-Finding nice "No LICENSE file found. That can be acceptable for a private repo, but add one before any public release."
-        } else {
-            Add-Finding signal "License file is present."
-        }
-    }
-}
-
-if (-not $testsPresent) {
-    Add-Finding blocker "Missing tests: add at least one automated smoke test before inviting collaborators."
-} else {
+if ($testsPresent) {
     Add-Finding signal "Automated tests are present."
-}
-
-if (-not $ciPresent) {
-    Add-Finding important "Missing CI workflow: add GitHub Actions so collaborators can verify the project on fresh clones."
+} elseif ($documentedValidationPresent) {
+    Add-Finding signal "Documented validation commands are present."
 } else {
-    Add-Finding signal "CI workflow directory is present."
-}
-
-if (-not $contributingPresent) {
-    if ($Visibility -eq "private") {
-        Add-Finding nice "Missing CONTRIBUTING.md: useful even for a private repo when teammates need shared setup and workflow guidance."
-    } else {
-        Add-Finding important "Missing CONTRIBUTING.md: document setup, tests, style expectations, and how to propose changes."
-    }
-} else {
-    Add-Finding signal "Contributor guidance is present."
-}
-
-if (-not $securityPresent) {
-    if ($Visibility -eq "private") {
-        Add-Finding nice "Missing SECURITY.md: useful if teammates need a private path for reporting vulnerabilities or secret leaks."
-    } else {
-        Add-Finding important "Missing SECURITY.md: explain how to report vulnerabilities privately."
-    }
-} else {
-    Add-Finding signal "Security policy is present."
-}
-
-if (-not $conductPresent) {
-    if ($Visibility -ne "private") {
-        Add-Finding nice "Missing CODE_OF_CONDUCT.md: useful once outside contributors start arriving."
-    }
-} else {
-    Add-Finding signal "Code of conduct is present."
-}
-
-if (-not $issueTemplatesPresent) {
-    if ($Visibility -ne "private") {
-        Add-Finding nice "Missing issue templates: add bug-report and feature-request templates under .github/ISSUE_TEMPLATE."
-    }
-} else {
-    Add-Finding signal "Issue templates are present."
-}
-
-if (-not $prTemplatePresent) {
-    if ($Visibility -ne "private") {
-        Add-Finding nice "Missing pull request template: ask for summary, testing, and screenshots when relevant."
-    }
-} else {
-    Add-Finding signal "Pull request template is present."
+    Add-Finding important "No obvious automated validation or test path found: add at least one automated smoke path or document the intended validation commands."
 }
 
 if ($docsPresent) {
     Add-Finding signal "Docs or examples folder is present."
 } else {
-    Add-Finding nice "No docs or examples folder found: consider adding docs/ or examples/ for deeper guidance."
+    Add-Finding nice "No docs or examples folder found: consider adding docs/ or examples/ when setup or behavior needs more context."
 }
 
 if (-not $gitignorePresent) {
-    Add-Finding important "Missing .gitignore: generated files and local data are easier to leak into GitHub history."
+    Add-Finding important "Missing .gitignore: generated files, caches, and local data are easier to leak into the repo."
 } else {
     Add-Finding signal ".gitignore is present."
 }
@@ -209,37 +160,42 @@ if ($suspiciousMatches.Count -gt 0) {
         $suffix = " (+" + ($suspiciousMatches.Count - $examples.Count) + " more)"
     }
 
-    Add-Finding blocker ("Tracked local or private artifacts: remove, anonymize, or move them out of git before wider sharing. Examples: " + ($examples -join ", ") + $suffix)
+    Add-Finding blocker ("Tracked local or private artifacts: remove, anonymize, or move them out of git. Examples: " + ($examples -join ", ") + $suffix)
     if ($gitignorePresent) {
-        Add-Finding important "Tracked local artifacts also suggest .gitignore should be expanded before the repo is shared more broadly."
+        Add-Finding important "Tracked local artifacts also suggest .gitignore should be expanded."
     }
 }
 
 $largeTrackedFiles = foreach ($relativePath in $trackedFiles) {
     $fullPath = Join-Path $repoRoot $relativePath
-    if (Test-Path -LiteralPath $fullPath) {
-        $item = Get-Item -LiteralPath $fullPath
-        if ($item.Length -ge 5MB) {
-            [PSCustomObject]@{
-                Path = $relativePath
-                SizeMb = [math]::Round($item.Length / 1MB, 2)
-            }
+    if (-not (Test-Path -LiteralPath $fullPath)) {
+        continue
+    }
+
+    try {
+        $resolvedPath = (Resolve-Path -LiteralPath $fullPath).Path
+        $item = [System.IO.FileInfo]::new($resolvedPath)
+    } catch {
+        continue
+    }
+
+    if ($item.Length -ge 5MB) {
+        [PSCustomObject]@{
+            Path = $relativePath
+            SizeMb = [math]::Round($item.Length / 1MB, 2)
         }
     }
 }
 
 if (@($largeTrackedFiles).Count -gt 0) {
     $formatted = @($largeTrackedFiles | Select-Object -First 5 | ForEach-Object { "$($_.Path) ($($_.SizeMb) MB)" })
-    Add-Finding important ("Large tracked files can make cloning and collaboration harder. Review: " + ($formatted -join ", "))
+    Add-Finding important ("Large tracked files can make cloning and local iteration harder. Review: " + ($formatted -join ", "))
 }
 
 $pyprojectPath = Join-Path $repoRoot "pyproject.toml"
 if (Test-Path -LiteralPath $pyprojectPath) {
     $pyproject = Get-Content -Raw -LiteralPath $pyprojectPath
     Add-Finding signal "pyproject.toml is present."
-    if ($pyproject -notmatch "(?m)^\[project\.urls\]") {
-        Add-Finding important "pyproject.toml has no [project.urls] section for Homepage, Repository, and Issues."
-    }
     if ($pyproject -notmatch '(?m)^requires-python\s*=') {
         Add-Finding important "pyproject.toml does not declare requires-python."
     }
@@ -256,9 +212,8 @@ if ($secretExamples.Count -gt 0) {
     Add-Finding important ("Possible hardcoded secret-like literals found. Review: " + ($secretExamples -join ", "))
 }
 
-Write-Output "# GitHub Repo Readiness Audit"
+Write-Output "# Local Repo Audit"
 Write-Output "Repo: $repoRoot"
-Write-Output "Visibility target: $Visibility"
 Write-Output ""
 
 function Write-Section {
@@ -278,7 +233,7 @@ function Write-Section {
     Write-Output ""
 }
 
-Write-Section "Release blockers" $releaseBlockers
+Write-Section "Repo blockers" $repoBlockers
 Write-Section "Important improvements" $important
 Write-Section "Nice-to-have polish" $niceToHave
 Write-Section "Signals already in place" $signals

@@ -8,6 +8,7 @@ Give the home-root AI setup one shared routing map that Codex and Claude can bot
    - home entrypoints such as `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`
    - repo-local tool overrides such as `.codex/` and `.claude/` when a repo needs tool-specific behavior
 2. Shared `lv0` base and specialist layers
+   Basic logistics, standards, audit, routing, and automation layers that can support many kinds of tasks.
    - `lv0-instruction-core`
    - `lv0-run-transparency`
    - `lv0-home-auditor`
@@ -16,12 +17,14 @@ Give the home-root AI setup one shared routing map that Codex and Claude can bot
    - `lv0-code-polisher`
    - `lv0-doc-writer`
 3. Shared `lv1` task layers
+   Reusable shared workflows that solve a class of work across many repos.
    - `lv1-feature-dev`
+   - `lv1-figma-implement-design`
    - `lv1-defect-fix`
    - `lv1-code-review`
    - `lv1-github-repo-readiness`
 4. Repo-specific wrappers
-   Keep these thin and compose them from the shared layers above.
+   Keep these thin, name them with a repo prefix such as `lv2-<repo>-<name>`, and compose them from the shared layers above.
 
 ## Folder Decision Guide
 - `~/.ai_shared/`: shared cross-tool defaults for workflows, templates, checklists, knowledge notes, examples, and tasks
@@ -37,13 +40,13 @@ Give the home-root AI setup one shared routing map that Codex and Claude can bot
 
 ## Composition Rules
 1. Start with the current tool's `lv0-instruction-core` wrapper.
-2. Decide whether the weekly `lv0-home-auditor` gate needs to run by checking `~/.ai_shared/knowledge/progress-tracker.md`.
+2. Decide whether the weekly `lv0-home-auditor` gates need to run by checking `~/.ai_shared/knowledge/progress-tracker.md` for the global home pass and `.ai_shared/knowledge/progress-tracker.md` for the current repo's weekly audit pass.
 3. Add `lv0-run-transparency` at the start of every run so the user sees the selected skills, the repo-local `.ai_shared/` files consulted, the home-level `~/.ai_shared/` defaults consulted, and why that stack fits the task.
 4. For any task that changes code, add `lv0-code-polisher` before deeper task work.
 5. Add any other needed `lv0` onboarding or specialist layer before deeper task work.
 6. Add the narrowest `lv1` task layer that matches the job.
-7. Keep `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` in every repo and update them as part of normal repo task flow.
-8. Reserve `~/.ai_shared/knowledge/progress-tracker.md` and `~/.ai_shared/knowledge/future-plan.md` for global `lv0-home-auditor` continuity across repos.
+7. Keep `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` in every repo and update them as part of normal repo task flow, including repo-specific weekly audit continuity.
+8. Reserve `~/.ai_shared/knowledge/progress-tracker.md` and `~/.ai_shared/knowledge/future-plan.md` for the global `lv0-home-auditor` continuity across repos.
 9. Put repo-specific shared rules, templates, checklists, workflows, and durable notes in repo-local `.ai_shared/`.
 10. Put tool-only behavior, wrapper logic, and config in the matching repo-local tool folder.
 
@@ -53,12 +56,15 @@ Give the home-root AI setup one shared routing map that Codex and Claude can bot
 - Code cleanup with no behavior change: tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv0-code-polisher`
 - Defect fix: tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv0-code-polisher` + `lv1-defect-fix`
 - Feature plus docs or PRDs: tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv0-code-polisher` + `lv1-feature-dev` + optional `lv0-doc-writer`
-- GitHub hardening or publication prep: tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv1-github-repo-readiness` + optional `lv0-doc-writer`
-- New repo-specific wrapper: tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + one `lv0` specialist + one repo-specific override in `.codex/` or `.claude/`
+- Figma-driven UI work: tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv0-code-polisher` + `lv1-figma-implement-design`
+- GitHub hardening or publication prep: tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + `lv0-home-auditor` + `lv1-github-repo-readiness` + optional `lv0-doc-writer`
+- New repo-specific wrapper: tool wrapper + `lv0-instruction-core` + `lv0-run-transparency` + one `lv0` specialist + one repo-specific `lv2-<repo>-<name>` override in `.codex/` or `.claude/`
 
 ## Maintenance Notes
 - When a shared rule changes, update `.ai_shared/` first and keep the tool wrappers short.
 - When you want a new template, checklist, workflow, or shared note, put it in `.ai_shared/` unless it is truly tool-specific.
 - Initialize repo-local `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` when onboarding a repo and keep them current after meaningful work.
 - Keep the live home `~/.ai_shared/knowledge/progress-tracker.md` and `~/.ai_shared/knowledge/future-plan.md` for weekly home-audit continuity rather than repo continuity.
+- Put repo-specific audit rules in repo-local `.ai_shared/workflows/workflow-home-audit.md`, `.ai_shared/checklists/home-audit-checklist.md`, and `.ai_shared/knowledge/home-audit-rules.md` when a repo needs extra audit coverage.
+- Put generic local-repo audit logic in `lv0-home-auditor`; keep GitHub-facing visibility and publication logic in `lv1-github-repo-readiness`.
 - For step-by-step creation rules, read `agent-authoring.md`.

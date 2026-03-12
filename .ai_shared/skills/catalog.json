@@ -31,9 +31,9 @@
     {
       "name": "lv0-home-auditor",
       "displayName": "Lv0 Home Auditor",
-      "description": "Audit the home-folder setup for local config drift, folder placement, wrapper sync, repo-specific weekly checks, and cleanup candidates. Use on the first repo request of each week or whenever the local home setup may be out of alignment.",
+      "description": "Lv0 logistics and audit layer for home-folder setup plus the shared local-repo audit baseline. Use it for local config drift, wrapper sync, repo-specific weekly checks, tracked-artifact risk, and cleanup candidates when the global or repo-local audit gate is missing or the home setup may be out of alignment.",
       "codexShortDescription": "Run the weekly home-folder alignment audit",
-      "codexDefaultPrompt": "Use $lv0-home-auditor to run the weekly home-folder alignment audit, verify shared folders and generated wrappers are in sync, check Codex and Claude access to the shared roots, and summarize cleanup candidates without deleting anything automatically."
+      "codexDefaultPrompt": "Use $lv0-home-auditor to check the global home-audit gate and the current repo's weekly audit gate, run the shared local-repo audit baseline, apply any repo-local audit rules, compare managed mirror surfaces to the live home roots when relevant, and summarize cleanup candidates without deleting anything automatically."
     },
     {
       "name": "lv0-repo-onboarding",
@@ -45,7 +45,7 @@
     {
       "name": "lv0-skill-onboarding",
       "displayName": "Lv0 Skill Onboarding",
-      "description": "Guide the creation or extension of shared lv0, lv1, and repo-specific lv2 skills and agents using the shared home-root authoring system.",
+      "description": "Guide the creation or extension of shared lv0 logistics/automation skills, shared lv1 workflows, and repo-prefixed lv2 skills and agents using the shared home-root authoring system.",
       "codexShortDescription": "Author or extend shared skills and agents safely",
       "codexDefaultPrompt": "Use $lv0-skill-onboarding to choose the right layer, update canonical shared skill definitions in .ai_shared when needed, regenerate the tool wrappers, and summarize the validation."
     },
@@ -71,11 +71,18 @@
       "codexDefaultPrompt": "Use $lv1-feature-dev to inspect context, capture requirements in a PRD when APIs or use cases need to be recorded, plan the smallest safe feature change, implement it, validate it, and summarize the result."
     },
     {
+      "name": "lv1-figma-implement-design",
+      "displayName": "Lv1 Figma Implement Design",
+      "description": "Implement Figma-driven UI work using the shared feature workflow and repo-specific context. Use when turning a Figma frame, node, or screenshot-backed handoff into repo-appropriate UI code with strong fidelity.",
+      "codexShortDescription": "Implement scoped Figma-driven UI work with repo fidelity",
+      "codexDefaultPrompt": "Use $lv1-figma-implement-design to confirm the Figma source, inspect the current UI surface, implement the smallest faithful change in repo conventions, validate both repo behavior and visual fidelity, and summarize any remaining gap."
+    },
+    {
       "name": "lv1-github-repo-readiness",
       "displayName": "Lv1 GitHub Repo Readiness",
-      "description": "Audit or improve a repository for private or public GitHub use. Use when preparing a repo for internal sharing, public release, contributor onboarding, or publication cleanup across multiple repos.",
+      "description": "Audit or improve a repository for GitHub-facing sharing, contributor surfaces, and publication decisions after the local repo audit baseline is in place. Use when preparing a repo for internal sharing, public release, contributor onboarding, or publication cleanup across multiple repos.",
       "codexShortDescription": "Audit or improve repos for private or public GitHub use",
-      "codexDefaultPrompt": "Use $lv1-github-repo-readiness to audit the repo for private or public GitHub readiness, surface blockers first, make safe low-risk improvements when appropriate, and summarize the next moves."
+      "codexDefaultPrompt": "Use $lv1-github-repo-readiness to build on the latest $lv0-home-auditor findings, focus on GitHub-facing and publication-specific blockers first, make safe low-risk improvements when appropriate, and summarize the next moves."
     }
   ]
 }

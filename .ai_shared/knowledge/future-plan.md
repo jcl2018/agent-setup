@@ -9,6 +9,7 @@ Capture unfinished work, deferred ideas, and next-step todos that should survive
 - Keep the highest-value near-term work near the top.
 
 ## Current Follow-Ups
+- Investigate why the macOS PowerShell sync path still misses some `.ai_shared/skills` updates and deletions on this machine, since the March 12, 2026 drift repair again needed shell `rsync` to keep the live home mirror correct.
 - Decide whether to manually remove the old live-home `.github` wrapper tree so `C:\Users\chang\` matches the repo's new two-tool setup; the sync scripts intentionally leave unmanaged home content in place.
 - After a few real feature tasks use the new PRD flow, decide whether the shared template needs a lighter one-page variant or a repo-level PRD index pattern.
 - After a little soak time, decide whether to keep or remove the backup object store at `E:\Dropbox\project\agent-setup\.git\objects.dropbox-backup-20260309`.

@@ -4,9 +4,9 @@
 Explain how to add or extend shared layers without breaking the split between shared `.ai_shared` context and tool-specific wrappers.
 
 ## Decide The Layer First
-- Create an `lv0-*` layer when the behavior is cross-cutting and reusable across many tasks.
-- Create an `lv1-*` layer when the behavior is a task wrapper such as feature work, defect fixing, review, or onboarding.
-- Reserve repo-specific wrappers for thin overrides that compose the shared layers instead of replacing them.
+- Create an `lv0-*` layer when the behavior is basic logistics, standards, audit, routing, automation, or another cross-cutting operational concern.
+- Create an `lv1-*` layer when the behavior is a reusable workflow such as feature work, defect fixing, review, or publication prep that should apply across repos.
+- Reserve repo-specific `lv2-<repo>-*` wrappers for thin overrides that compose the shared layers instead of replacing them.
 
 ## When To Create Shared Content
 - Put shared workflows in `.ai_shared/workflows/`.
@@ -50,6 +50,9 @@ Explain how to add or extend shared layers without breaking the split between sh
 6. Codex shared-skill changes must still be mirrored into `.codex/.agents-home/skills/`.
 7. Repo continuity lives in `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md`.
 8. Global `lv0-home-auditor` continuity lives in `~/.ai_shared/knowledge/progress-tracker.md` and `~/.ai_shared/knowledge/future-plan.md`.
+9. Repo-specific weekly audit rules belong in the repo's `.ai_shared/workflows/workflow-home-audit.md`, `.ai_shared/checklists/home-audit-checklist.md`, and optional `.ai_shared/knowledge/home-audit-rules.md`.
+10. Put generic local-repo audit logic in `lv0-home-auditor`; keep GitHub-facing visibility and publication checks in `lv1-github-repo-readiness`.
+11. Use a repo prefix in `lv2-<repo>-*` names so the scope is obvious the moment someone sees the wrapper.
 
 ## Example Stacks
 - Weekly home-folder alignment layer:
