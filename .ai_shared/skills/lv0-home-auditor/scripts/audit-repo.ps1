@@ -104,6 +104,35 @@ function Get-RelativePath {
     return $normalizedPath
 }
 
+function Get-TrackedTextFiles {
+    param([string[]]$Patterns)
+
+    foreach ($relativePath in $trackedFiles) {
+        $matchesPattern = $false
+        foreach ($pattern in $Patterns) {
+            if ($relativePath -like $pattern) {
+                $matchesPattern = $true
+                break
+            }
+        }
+
+        if (-not $matchesPattern) {
+            continue
+        }
+
+        $fullPath = Join-Path $repoRoot $relativePath
+        if (-not (Test-Path -LiteralPath $fullPath)) {
+            continue
+        }
+
+        try {
+            Get-Item -LiteralPath $fullPath -ErrorAction Stop
+        } catch {
+            continue
+        }
+    }
+}
+
 $readmePresent = Test-AnyPath @("README.md", "README.rst", "README.txt")
 $testsPresent = (Test-Path -LiteralPath (Join-Path $repoRoot "tests")) -or (@(Get-ChildItem -LiteralPath $repoRoot -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -match "^(test|spec)" }).Count -gt 0)
 $documentedValidationPresent = Test-DocumentedValidationPath @(".ai_shared/knowledge/test-commands.md", "README.md", "README.rst", "README.txt")
@@ -166,6 +195,48 @@ if ($suspiciousMatches.Count -gt 0) {
     }
 }
 
+$localOnlyRecordPatterns = @(
+    "*progress-tracker.md",
+    "*future-plan.md",
+    ".codex/auth.json",
+    ".codex/cap_sid",
+    ".codex/.codex-global-state.json",
+    ".codex/.personality_migration",
+    ".codex/models_cache.json",
+    ".codex/session_index.jsonl",
+    ".codex/sessions/*",
+    ".codex/sqlite/*",
+    ".codex/state_*.sqlite",
+    ".codex/state_*.sqlite-*",
+    ".codex/tmp/*",
+    ".codex/vendor_imports/*",
+    ".claude/.credentials.json",
+    ".claude/projects/*",
+    ".claude/statsig/*"
+)
+
+$localOnlyRecordMatches = @(Get-TrackedMatches $localOnlyRecordPatterns)
+if ($localOnlyRecordMatches.Count -gt 0) {
+    $examples = @($localOnlyRecordMatches | Select-Object -First 8)
+    $suffix = ""
+    if ($localOnlyRecordMatches.Count -gt $examples.Count) {
+        $suffix = " (+" + ($localOnlyRecordMatches.Count - $examples.Count) + " more)"
+    }
+
+    Add-Finding blocker ("Tracked local tracking files or tool runtime/session files should stay off remotes. Remove or untrack them before broader collaboration. Examples: " + ($examples -join ", ") + $suffix)
+}
+
+$textFilePatterns = @("*.md", "*.txt", "*.rst", "*.py", "*.ps1", "*.sh", "*.js", "*.ts", "*.tsx", "*.jsx", "*.yml", "*.yaml", "*.toml", "*.json", "*.ini", "*.cfg")
+$trackedTextFiles = @(Get-TrackedTextFiles $textFilePatterns)
+$absolutePathRegex = '(?i)(/Users/[^/\s"'']+(?:/[^\s"'']+)*)|(/home/[^/\s"'']+(?:/[^\s"'']+)*)|([A-Z]:\\Users\\[^\\\s"'']+(?:\\[^\\\s"'']+)*)'
+$absolutePathHits = foreach ($file in $trackedTextFiles) {
+    Select-String -Path $file.FullName -Pattern $absolutePathRegex -ErrorAction SilentlyContinue
+}
+$absolutePathExamples = @($absolutePathHits | Select-Object -First 5 | ForEach-Object { "$(Get-RelativePath $_.Path):$($_.LineNumber)" })
+if ($absolutePathExamples.Count -gt 0) {
+    Add-Finding important ("Tracked shareable files contain user-specific absolute filesystem paths. Replace them with repo-relative paths, or `~`-relative home-install paths when needed. Review: " + ($absolutePathExamples -join ", "))
+}
+
 $largeTrackedFiles = foreach ($relativePath in $trackedFiles) {
     $fullPath = Join-Path $repoRoot $relativePath
     if (-not (Test-Path -LiteralPath $fullPath)) {
@@ -201,7 +272,6 @@ if (Test-Path -LiteralPath $pyprojectPath) {
     }
 }
 
-$textFilePatterns = @("*.py", "*.ps1", "*.sh", "*.js", "*.ts", "*.tsx", "*.jsx", "*.yml", "*.yaml", "*.toml", "*.json", "*.ini", "*.cfg")
 $sourceFiles = @(Get-ChildItem -LiteralPath $repoRoot -Recurse -File -Include $textFilePatterns -ErrorAction SilentlyContinue | Where-Object { $_.FullName -notmatch "[\\/]\.git([\\/]|$)" })
 $secretRegex = '(?i)(secret|api[_-]?key|token|password)[^`r`n]{0,40}?[:=]\s*["''][^"'']+["'']'
 $secretHits = foreach ($file in $sourceFiles) {

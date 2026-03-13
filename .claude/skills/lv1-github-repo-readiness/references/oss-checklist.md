@@ -20,6 +20,8 @@
 - Document local setup, test commands, and expected access prerequisites for teammates.
 - Explain which secrets stay local and how collaborators request access safely.
 - Explain how GitHub collaborators should report vulnerabilities or secret leaks privately.
+- Keep local tracking files and tool runtime/session files out of remote branches. Examples: `progress-tracker.md`, `future-plan.md`, and tool session/runtime state.
+- Replace user-specific absolute filesystem paths with repo-relative paths, or `~`-relative home-install paths when a home path is genuinely required.
 
 ## README Rubric
 

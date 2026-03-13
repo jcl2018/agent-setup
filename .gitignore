@@ -27,3 +27,7 @@ Thumbs.db
 
 # Future GitHub local/runtime state
 .github/cache/
+
+# Repo-local continuity docs
+.ai_shared/knowledge/progress-tracker.md
+.ai_shared/knowledge/future-plan.md

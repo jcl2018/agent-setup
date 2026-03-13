@@ -25,12 +25,14 @@ This capability supports both private and public repos:
    - `private` for internal or limited sharing
    - `public` for open release
    - `either` when the repo should stay safe for both paths
-6. Read `references/oss-checklist.md` from this skill for the GitHub-facing review rubric.
+6. Read `references/oss-checklist.md` from this skill for the GitHub-facing review rubric, and read repo-local `.ai_shared/knowledge/remote-sharing-rules.md` when the repo defines it; otherwise use `~/.ai_shared/knowledge/remote-sharing-rules.md`.
 7. Inspect the GitHub/publication surface:
    - `LICENSE`, `CONTRIBUTING.md`, `SECURITY.md`, and `CODE_OF_CONDUCT.md`
    - `.github/workflows`, issue templates, and pull request templates
    - package metadata such as repository URLs, homepage URLs, and issue tracker URLs
    - README messaging, disclosure decisions, and other GitHub landing-page concerns
+   - tracked local-only tracking files and tool runtime/session files such as `progress-tracker.md`, `future-plan.md`, and tool session/runtime state that should stay off remotes
+   - user-specific absolute filesystem paths in tracked shareable content that should be replaced with repo-relative or `~`-relative forms
 8. Run `scripts/audit-github-readiness.ps1 -RepoPath <path> -Visibility <private|public|either>` from this skill when PowerShell is available. If PowerShell is unavailable, mirror the same GitHub-facing checks manually.
 9. Separate findings into:
    - blockers for any GitHub sharing
@@ -38,11 +40,12 @@ This capability supports both private and public repos:
    - important improvements
    - nice-to-have polish
 10. Recommend or implement only low-risk edits without extra approval. Good candidates are CI wiring, issue templates, PR templates, README landing-page cleanup, `CONTRIBUTING.md`, `SECURITY.md`, or other GitHub-facing docs.
-11. Pause before user-specific decisions. Ask before choosing a real `LICENSE`, publishing anything that may contain private data, deleting user artifacts from history, or making governance promises.
-12. Validate the result:
+11. Follow the shared remote-sharing rules before recommending any push. Treat repo tracking files and tool runtime/session files as local records rather than remote deliverables, and treat user-specific absolute filesystem paths in tracked shareable content as a remote-sharing blocker until they are replaced with repo-relative or `~`-relative forms. Normal repo knowledge notes, templates, workflows, and checklists remain shareable repo content unless a repo-specific rule says otherwise.
+12. Pause before user-specific decisions. Ask before choosing a real `LICENSE`, publishing anything that may contain private data, deleting user artifacts from history, or making governance promises.
+13. Validate the result:
    - use the shared code-review workflow when the work is findings-first
    - use the shared feature workflow and its checklists if you implement fixes in the same pass
-13. Update `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` for repo-local continuity when the shared workflow changes or follow-up repo work remains.
+14. Update `.ai_shared/knowledge/progress-tracker.md` and `.ai_shared/knowledge/future-plan.md` for repo-local continuity when the shared workflow changes or follow-up repo work remains.
 
 ## Output Shape
 

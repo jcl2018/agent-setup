@@ -52,7 +52,8 @@ Explain how to add or extend shared layers without breaking the split between sh
 8. Global `lv0-home-auditor` continuity lives in `~/.ai_shared/knowledge/progress-tracker.md` and `~/.ai_shared/knowledge/future-plan.md`.
 9. Repo-specific weekly audit rules belong in the repo's `.ai_shared/workflows/workflow-home-audit.md`, `.ai_shared/checklists/home-audit-checklist.md`, and optional `.ai_shared/knowledge/home-audit-rules.md`.
 10. Put generic local-repo audit logic in `lv0-home-auditor`; keep GitHub-facing visibility and publication checks in `lv1-github-repo-readiness`.
-11. Use a repo prefix in `lv2-<repo>-*` names so the scope is obvious the moment someone sees the wrapper.
+11. When both `lv0` and `lv1` need the same remote-sharing policy, keep that policy in a shared knowledge note such as `.ai_shared/knowledge/remote-sharing-rules.md` and have each layer reference it instead of making one layer depend on the other.
+12. Use a repo prefix in `lv2-<repo>-*` names so the scope is obvious the moment someone sees the wrapper.
 
 ## Example Stacks
 - Weekly home-folder alignment layer:

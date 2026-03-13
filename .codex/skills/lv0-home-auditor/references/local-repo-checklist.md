@@ -6,6 +6,8 @@
 - Verify the repo has at least one documented or discoverable automated validation or test path.
 - Verify `.gitignore` exists and covers local databases, caches, generated output, and secret-bearing env files.
 - Remove, anonymize, or quarantine tracked local artifacts such as databases, spreadsheets, caches, backups, and generated reports before wider collaboration.
+- Flag tracked local tracking files and tool session/runtime files that should stay off remotes, especially `progress-tracker.md`, `future-plan.md`, and tool session/runtime state.
+- Flag user-specific absolute filesystem paths in tracked shareable files, and replace them with repo-relative paths or `~`-relative home-install paths.
 - Look for hardcoded secret-like literals and other values that should stay local.
 - Review whether large tracked files belong in git or need a safer distribution path.
 - Confirm docs, examples, or sanitized sample data exist when the real project data cannot be shared.

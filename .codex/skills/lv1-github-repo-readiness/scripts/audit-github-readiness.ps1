@@ -14,6 +14,8 @@ if ($LASTEXITCODE -ne 0 -or $gitCheck.Trim() -ne "true") {
     exit 1
 }
 
+$trackedFiles = @(git -C $repoRoot ls-files)
+
 $releaseBlockers = New-Object System.Collections.Generic.List[string]
 $important = New-Object System.Collections.Generic.List[string]
 $niceToHave = New-Object System.Collections.Generic.List[string]
@@ -44,6 +46,62 @@ function Test-AnyPath {
     }
 
     return $false
+}
+
+function Get-TrackedMatches {
+    param([string[]]$Patterns)
+
+    $matches = foreach ($pattern in $Patterns) {
+        $trackedFiles | Where-Object { $_ -like $pattern }
+    }
+
+    @(
+        $matches |
+            Sort-Object -Unique -Property `
+                @{ Expression = { ($_ -split "[/\\]").Count } }, `
+                @{ Expression = { $_ } }
+    )
+}
+
+function Get-RelativePath {
+    param([string]$FullPath)
+
+    $normalizedRoot = [System.IO.Path]::GetFullPath($repoRoot)
+    $normalizedPath = [System.IO.Path]::GetFullPath($FullPath)
+    if ($normalizedPath.StartsWith($normalizedRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $normalizedPath.Substring($normalizedRoot.Length).TrimStart("\", "/")
+    }
+
+    return $normalizedPath
+}
+
+function Get-TrackedTextFiles {
+    param([string[]]$Patterns)
+
+    foreach ($relativePath in $trackedFiles) {
+        $matchesPattern = $false
+        foreach ($pattern in $Patterns) {
+            if ($relativePath -like $pattern) {
+                $matchesPattern = $true
+                break
+            }
+        }
+
+        if (-not $matchesPattern) {
+            continue
+        }
+
+        $fullPath = Join-Path $repoRoot $relativePath
+        if (-not (Test-Path -LiteralPath $fullPath)) {
+            continue
+        }
+
+        try {
+            Get-Item -LiteralPath $fullPath -ErrorAction Stop
+        } catch {
+            continue
+        }
+    }
 }
 
 $licensePresent = Test-AnyPath @("LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING")
@@ -126,6 +184,48 @@ if (-not $prTemplatePresent) {
     }
 } else {
     Add-Finding signal "Pull request template is present."
+}
+
+$localOnlyRecordPatterns = @(
+    "*progress-tracker.md",
+    "*future-plan.md",
+    ".codex/auth.json",
+    ".codex/cap_sid",
+    ".codex/.codex-global-state.json",
+    ".codex/.personality_migration",
+    ".codex/models_cache.json",
+    ".codex/session_index.jsonl",
+    ".codex/sessions/*",
+    ".codex/sqlite/*",
+    ".codex/state_*.sqlite",
+    ".codex/state_*.sqlite-*",
+    ".codex/tmp/*",
+    ".codex/vendor_imports/*",
+    ".claude/.credentials.json",
+    ".claude/projects/*",
+    ".claude/statsig/*"
+)
+
+$localOnlyRecordMatches = @(Get-TrackedMatches $localOnlyRecordPatterns)
+if ($localOnlyRecordMatches.Count -gt 0) {
+    $examples = @($localOnlyRecordMatches | Select-Object -First 8)
+    $suffix = ""
+    if ($localOnlyRecordMatches.Count -gt $examples.Count) {
+        $suffix = " (+" + ($localOnlyRecordMatches.Count - $examples.Count) + " more)"
+    }
+
+    Add-Finding blocker ("Tracked local tracking files or tool runtime/session files should stay off remotes. Remove or untrack them before sharing. Examples: " + ($examples -join ", ") + $suffix)
+}
+
+$textFilePatterns = @("*.md", "*.txt", "*.rst", "*.py", "*.ps1", "*.sh", "*.js", "*.ts", "*.tsx", "*.jsx", "*.yml", "*.yaml", "*.toml", "*.json", "*.ini", "*.cfg")
+$trackedTextFiles = @(Get-TrackedTextFiles $textFilePatterns)
+$absolutePathRegex = '(?i)(/Users/[^/\s"'']+(?:/[^\s"'']+)*)|(/home/[^/\s"'']+(?:/[^\s"'']+)*)|([A-Z]:\\Users\\[^\\\s"'']+(?:\\[^\\\s"'']+)*)'
+$absolutePathHits = foreach ($file in $trackedTextFiles) {
+    Select-String -Path $file.FullName -Pattern $absolutePathRegex -ErrorAction SilentlyContinue
+}
+$absolutePathExamples = @($absolutePathHits | Select-Object -First 5 | ForEach-Object { "$(Get-RelativePath $_.Path):$($_.LineNumber)" })
+if ($absolutePathExamples.Count -gt 0) {
+    Add-Finding blocker ("Tracked shareable files contain user-specific absolute filesystem paths. Replace them with repo-relative paths, or `~`-relative home-install paths before sharing. Review: " + ($absolutePathExamples -join ", "))
 }
 
 $pyprojectPath = Join-Path $repoRoot "pyproject.toml"

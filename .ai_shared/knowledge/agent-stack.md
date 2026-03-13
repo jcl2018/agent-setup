@@ -67,4 +67,5 @@ Give the home-root AI setup one shared routing map that Codex and Claude can bot
 - Keep the live home `~/.ai_shared/knowledge/progress-tracker.md` and `~/.ai_shared/knowledge/future-plan.md` for weekly home-audit continuity rather than repo continuity.
 - Put repo-specific audit rules in repo-local `.ai_shared/workflows/workflow-home-audit.md`, `.ai_shared/checklists/home-audit-checklist.md`, and `.ai_shared/knowledge/home-audit-rules.md` when a repo needs extra audit coverage.
 - Put generic local-repo audit logic in `lv0-home-auditor`; keep GitHub-facing visibility and publication logic in `lv1-github-repo-readiness`.
+- When `lv0` and `lv1` share a remote-sharing policy, keep the policy in a shared knowledge note such as `.ai_shared/knowledge/remote-sharing-rules.md` and have both layers reference it.
 - For step-by-step creation rules, read `agent-authoring.md`.
