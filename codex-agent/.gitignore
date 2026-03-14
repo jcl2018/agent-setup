@@ -1,0 +1,28 @@
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Codex local/runtime state
+.codex/auth.json
+.codex/cap_sid
+.codex/.codex-global-state.json
+.codex/.personality_migration
+.codex/models_cache.json
+.codex/session_index.jsonl
+.codex/state_*.sqlite
+.codex/state_*.sqlite-shm
+.codex/state_*.sqlite-wal
+.codex/sessions/
+.codex/sqlite/
+.codex/tmp/
+.codex/vendor_imports/
+.codex/.sandbox/
+.codex/.sandbox-bin/
+.codex/.sandbox-secrets/
+
+# Future GitHub local/runtime state
+.github/cache/
+
+# Repo-local continuity docs
+.ai_shared/knowledge/progress-tracker.md
+.ai_shared/knowledge/future-plan.md
